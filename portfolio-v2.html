@@ -2375,6 +2375,46 @@
     .term-line-out { color: rgba(255,255,255,0.85); }
     .term-line-spacer { height: 8px; }
 
+    /* ── Nav link underline slide-in ── */
+    .nav-links a {
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 100%; height: 1.5px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform .25s cubic-bezier(.22,1,.36,1);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* ── Bulletin board staggered entrance ── */
+    .pin-card {
+      opacity: 0;
+      transform: translateY(28px) scale(0.96);
+      transition: opacity .5s cubic-bezier(.22,1,.36,1),
+                  transform .5s cubic-bezier(.22,1,.36,1);
+    }
+    .pin-card.card-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ── 3D tilt on cards ── */
+    .pin-card-inner {
+      transition: transform .15s ease, box-shadow .15s ease;
+      will-change: transform;
+    }
+
+    /* ── Footer link magnetic ── */
+    .footer-link {
+      transition: transform .2s cubic-bezier(.22,1,.36,1), color .18s;
+      display: inline-flex;
+    }
+
     /* Reduced motion overrides */
     @media (prefers-reduced-motion: reduce) {
       .badge-wrap, .obj-ticket, .sticky-note, .terminal, .hero-center {
@@ -3059,6 +3099,65 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  // ── Text scramble on hero name ────────────────────────────
+  const heroName = document.querySelector('.hero-name');
+  if (heroName && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const finalText = heroName.textContent;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let frame = 0;
+    const totalFrames = 22;
+    const scramble = setInterval(() => {
+      heroName.textContent = finalText.split('').map((ch, i) => {
+        if (ch === ' ') return ' ';
+        if (frame / totalFrames > i / finalText.length) return ch;
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      frame++;
+      if (frame > totalFrames) { heroName.textContent = finalText; clearInterval(scramble); }
+    }, 45);
+  }
+
+  // ── Staggered bulletin board card entrance ─────────────────
+  const cards = document.querySelectorAll('.pin-card');
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = parseInt(entry.target.dataset.cardIdx || 0);
+        setTimeout(() => entry.target.classList.add('card-visible'), idx * 80);
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach((card, i) => { card.dataset.cardIdx = i; cardObserver.observe(card); });
+
+  // ── 3D card tilt on mouse move ─────────────────────────────
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      const inner = card.querySelector('.pin-card-inner');
+      if (inner) inner.style.transform = `rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.03)`;
+    });
+    card.addEventListener('mouseleave', e => {
+      const inner = card.querySelector('.pin-card-inner');
+      if (inner) inner.style.transform = '';
+    });
+  });
+
+  // ── Magnetic footer links ──────────────────────────────────
+  document.querySelectorAll('.footer-link').forEach(link => {
+    link.addEventListener('mousemove', e => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const r = link.getBoundingClientRect();
+      const x = (e.clientX - (r.left + r.width  / 2)) * 0.3;
+      const y = (e.clientY - (r.top  + r.height / 2)) * 0.3;
+      link.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    link.addEventListener('mouseleave', () => { link.style.transform = ''; });
+  });
 
 }); // end DOMContentLoaded
 
