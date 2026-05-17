@@ -2104,33 +2104,52 @@
     .pin-card.sticky-green  { background: #e4f0e8; border-color: #c0d8c4; }
 
     /* ── FOOTER ──────────────────────────────────────────── */
-    .site-footer {
+    footer {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(250,250,247,0.82);
       border-top: 1px solid rgba(0,0,0,.07);
-      display: flex; align-items: flex-start; justify-content: space-between; gap: 48px;
-      padding: 52px 52px 32px; max-width: 1200px; margin: 0 auto;
     }
-    .footer-left { max-width: 480px; }
+    .site-footer {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 28px;
+      padding: 64px 52px 36px; max-width: 1200px; margin: 0 auto;
+    }
     .footer-name {
-      font-family: var(--heading); font-size: clamp(2.2rem,4vw,3.5rem);
-      font-weight: 600; letter-spacing: -.05em; line-height: 1;
-      color: var(--text); margin-bottom: 14px;
+      font-family: var(--heading); font-size: clamp(2rem,4vw,3rem);
+      font-weight: 700; letter-spacing: -.05em; line-height: 1;
+      color: var(--text);
     }
-    .footer-tagline { font-family: var(--body); font-size: 1rem; color: var(--muted); line-height: 1.6; }
-    .footer-links { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; padding-top: 4px; }
+    .footer-tagline {
+      font-family: var(--body); font-size: .95rem; color: var(--muted);
+      line-height: 1.6; max-width: 460px;
+    }
+    .footer-links {
+      display: flex; flex-direction: row; flex-wrap: wrap;
+      justify-content: center; gap: 8px 28px;
+    }
     .footer-link {
-      font-family: var(--body); font-size: 1rem; font-weight: 500; color: var(--text);
-      text-decoration: none; letter-spacing: -.02em;
-      display: inline-flex; align-items: center; gap: 6px; transition: color .18s;
+      font-family: var(--body); font-size: .9rem; font-weight: 500; color: var(--text);
+      text-decoration: none; letter-spacing: -.01em;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 6px 0; position: relative;
+    }
+    .footer-link::after {
+      content: ''; position: absolute; bottom: 4px; left: 0;
+      width: 100%; height: 1px; background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .22s cubic-bezier(.22,1,.36,1);
     }
     .footer-link:hover { color: var(--accent); }
-    .footer-link svg { width: 13px; height: 13px; opacity: .5; }
+    .footer-link:hover::after { transform: scaleX(1); }
+    .footer-link svg { width: 11px; height: 11px; opacity: .4; }
     .footer-base {
-      border-top: 1px solid rgba(0,0,0,.07); padding: 0 52px 32px;
+      border-top: 1px solid rgba(0,0,0,.06); padding: 16px 52px 24px;
       max-width: 1200px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .footer-copy { font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-    .footer-status { display: flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .footer-copy { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .footer-status { display: flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); cursor: pointer; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.18); animation: pulse-status 2.4s ease-in-out infinite; }
     @keyframes pulse-status { 0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,.18); } 50% { box-shadow: 0 0 0 6px rgba(34,197,94,.06); } }
 
@@ -2836,10 +2855,8 @@
 <!-- ── FOOTER ──────────────────────────────────────────────── -->
 <footer>
   <div class="site-footer">
-    <div class="footer-left">
-      <div class="footer-name">Archana<br>Hiremath.</div>
-      <p class="footer-tagline">Product designer. 0→1 in healthcare, fintech, and India's 50+ market. Open to senior IC and design lead roles.</p>
-    </div>
+    <div class="footer-name">Archana Hiremath.</div>
+    <p class="footer-tagline">Product designer · 0→1 in healthcare, fintech, and India's 50+ market.<br>Open to senior IC and design lead roles.</p>
     <nav class="footer-links">
       <a class="footer-link" href="https://www.linkedin.com/in/archanahiremath" target="_blank" rel="noopener">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
       <a class="footer-link" href="https://read.cv/archanahiremath" target="_blank" rel="noopener">Read.cv <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg></a>
@@ -3120,16 +3137,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── Staggered bulletin board card entrance ─────────────────
   const cards = document.querySelectorAll('.pin-card');
-  const cardObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const idx = parseInt(entry.target.dataset.cardIdx || 0);
-        setTimeout(() => entry.target.classList.add('card-visible'), idx * 80);
-        cardObserver.unobserve(entry.target);
+  const board = document.querySelector('.bulletin-board');
+  if (board) {
+    new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        cards.forEach((card, i) => {
+          setTimeout(() => card.classList.add('card-visible'), i * 100);
+        });
       }
-    });
-  }, { threshold: 0.1 });
-  cards.forEach((card, i) => { card.dataset.cardIdx = i; cardObserver.observe(card); });
+    }, { threshold: 0.15 }).observe(board);
+  }
 
   // ── 3D card tilt on mouse move ─────────────────────────────
   cards.forEach(card => {
