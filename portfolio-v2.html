@@ -3126,23 +3126,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ── Text scramble on hero name ────────────────────────────
-  const heroName = document.querySelector('.hero-name');
-  if (heroName && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const finalText = heroName.textContent;
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    let frame = 0;
-    const totalFrames = 22;
-    const scramble = setInterval(() => {
-      heroName.textContent = finalText.split('').map((ch, i) => {
-        if (ch === ' ') return ' ';
-        if (frame / totalFrames > i / finalText.length) return ch;
-        return chars[Math.floor(Math.random() * chars.length)];
-      }).join('');
-      frame++;
-      if (frame > totalFrames) { heroName.textContent = finalText; clearInterval(scramble); }
-    }, 45);
-  }
 
   // ── Staggered bulletin board card entrance ─────────────────
   const cards = document.querySelectorAll('.pin-card');
