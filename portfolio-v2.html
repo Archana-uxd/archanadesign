@@ -1044,7 +1044,7 @@
     .ios-icon {
       width: 80px;
       height: 80px;
-      border-radius: 18px;
+      border-radius: 28px;
       position: relative;
       display: flex;
       align-items: center;
@@ -1829,17 +1829,19 @@
 
     .pdf-toolbar-btn {
       font-family: 'Radio Canada Big', sans-serif;
-      font-size: .7rem;
-      color: #8a7e72;
-      background: none;
+      font-size: .82rem;
+      font-weight: 600;
+      color: #3a3028;
+      background: rgba(0,0,0,.08);
       border: none;
       cursor: pointer;
-      padding: 3px 8px;
-      border-radius: 4px;
+      padding: 6px 14px;
+      border-radius: 20px;
       transition: background .15s, color .15s;
+      letter-spacing: -.01em;
     }
 
-    .pdf-toolbar-btn:hover { background: rgba(0,0,0,.07); color: #3a3028; }
+    .pdf-toolbar-btn:hover { background: rgba(0,0,0,.15); color: #1a1008; }
 
     .pdf-toolbar-title {
       flex: 1;
@@ -2351,11 +2353,16 @@
       50%       { transform: rotate(-0.5deg); }
     }
 
+    /* Name loads first, objects follow */
+    .hero-center {
+      opacity: 0;
+      animation: hero-fade-up 800ms cubic-bezier(.22,1,.36,1) 100ms forwards;
+    }
     .badge-wrap {
       opacity: 0;
       animation:
-        hero-swing-in 900ms cubic-bezier(.22,1,.36,1) 150ms forwards,
-        badge-pendulum 5s ease-in-out 1100ms infinite;
+        hero-swing-in 900ms cubic-bezier(.22,1,.36,1) 500ms forwards,
+        badge-pendulum 5s ease-in-out 1450ms infinite;
     }
     .badge-wrap:hover {
       animation-play-state: running, paused;
@@ -2363,19 +2370,15 @@
     }
     .obj-ticket {
       opacity: 0;
-      animation: hero-slide-right 800ms cubic-bezier(.22,1,.36,1) 350ms forwards;
+      animation: hero-slide-right 800ms cubic-bezier(.22,1,.36,1) 650ms forwards;
     }
     .sticky-note {
       opacity: 0;
-      animation: hero-drop-bounce 750ms cubic-bezier(.22,1,.36,1) 550ms forwards;
+      animation: hero-drop-bounce 750ms cubic-bezier(.22,1,.36,1) 800ms forwards;
     }
     .terminal {
       opacity: 0;
-      animation: hero-slide-up 700ms cubic-bezier(.22,1,.36,1) 750ms forwards;
-    }
-    .hero-center {
-      opacity: 0;
-      animation: hero-fade-up 900ms cubic-bezier(.22,1,.36,1) 950ms forwards;
+      animation: hero-slide-up 700ms cubic-bezier(.22,1,.36,1) 950ms forwards;
     }
 
     /* Terminal typing cursor */
@@ -2743,10 +2746,11 @@
       <span class="pdf-titlebar-name" id="pdf-title"></span>
     </div>
     <div class="pdf-toolbar">
-      <button class="pdf-toolbar-btn" onclick="closePDF()">← Back to Work</button>
+      <button class="pdf-toolbar-btn" onclick="closePDF()">← Close</button>
       <span class="pdf-toolbar-title" id="pdf-subtitle"></span>
+      <button class="pdf-toolbar-btn" onclick="closePDF()" style="margin-left:auto;opacity:.6;font-size:.75rem;">ESC</button>
     </div>
-    <iframe id="pdf-frame" src="" loading="lazy"></iframe>
+    <iframe id="pdf-frame" src="" loading="eager"></iframe>
   </div>
 </div>
 
@@ -3085,6 +3089,11 @@ document.addEventListener('DOMContentLoaded', function() {
   window.handleBackdropClick = function(e) {
     if (e.target === backdrop) window.closePDF();
   }
+
+  // ESC key closes PDF
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) window.closePDF();
+  });
 
 
 
