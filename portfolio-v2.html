@@ -2451,6 +2451,62 @@
       .term-cursor { animation: none !important; }
     }
 
+  /* ── RESPONSIVE ─────────────────────────────────────────── */
+  @media (max-width: 768px) {
+
+    /* Nav */
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: .78rem; }
+
+    /* Hero — stack objects, keep name centred */
+    .hero { min-height: 100svh; }
+    .hero-center { width: 90vw; }
+    .hero-name { font-size: clamp(2.8rem, 10vw, 4rem); }
+    .hero-sub  { font-size: .9rem; }
+    .badge-wrap { top: 12%; left: 4%; transform: scale(.8) rotate(-2.5deg); transform-origin: top left; }
+    .obj-ticket { top: 10%; right: 2%; transform: scale(.75) rotate(2deg); transform-origin: top right; }
+    .sticky-note { bottom: 16%; left: 3%; transform: scale(.8) rotate(-1.5deg); transform-origin: bottom left; }
+    .terminal { bottom: 12%; right: 2%; width: clamp(180px, 44vw, 240px); transform: scale(.85) rotate(0deg); transform-origin: bottom right; }
+
+    /* About */
+    .about { padding: 80px 20px; min-height: unset; }
+    .about-corner { display: none; }
+    .about-inner { font-size: 1.05rem; }
+    .about-sticky-wrap { display: none; }
+
+    /* Finder / Work */
+    .finder-window { margin: 0 16px; border-radius: 12px; }
+    .finder-body { flex-direction: column; min-height: unset; }
+    .finder-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(0,0,0,.08); padding: 12px 16px; flex-direction: row; flex-wrap: wrap; gap: 8px; }
+    .finder-sidebar-item { padding: 6px 12px; border-radius: 20px; font-size: .78rem; }
+    .finder-main { padding: 16px; }
+    .finder-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 8px 0; }
+    .folder-item { padding: 12px 8px; }
+    .ios-icon { width: 60px; height: 60px; border-radius: 16px; }
+    .folder-name { font-size: .78rem; }
+    .folder-metric { font-size: .68rem; }
+
+    /* Playground / Bulletin board */
+    .playground { padding: 60px 20px 80px; }
+    .bulletin-board { grid-template-columns: 1fr; gap: 14px; }
+    .pin-card.tall { grid-row: span 1; }
+
+    /* Footer */
+    .site-footer { padding: 48px 20px 28px; gap: 20px; }
+    .footer-name { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+    .footer-tagline { font-size: .85rem; }
+    .footer-links { gap: 6px 20px; }
+    .footer-base { padding: 14px 20px 20px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .finder-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-name { font-size: clamp(2.4rem, 12vw, 3rem); }
+    .bulletin-board { grid-template-columns: 1fr; }
+    .terminal { display: none; }
+  }
+
   </style>
 </head>
 <body>
@@ -3070,12 +3126,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   function openPDF(id) {
-    const { src, title, subtitle } = pdfs[id];
-    pdfFrame.src       = src;
-    pdfTitle.textContent    = title;
-    pdfSubtitle.textContent = subtitle;
-    backdrop.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    const { src } = pdfs[id];
+    window.open(src, '_blank');
   }
 
   window.closePDF = function() {
