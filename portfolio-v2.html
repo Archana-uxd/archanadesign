@@ -2475,10 +2475,13 @@
     .about-inner { font-size: 1.05rem; }
     .about-sticky-wrap { display: none; }
 
-    /* Work / Project cards */
-    .work { padding: 60px 20px 80px; }
-    .proj-grid { grid-template-columns: 1fr; gap: 20px; }
-    .proj-visual { height: 160px; }
+    /* Work / Project rows */
+    .work { padding: 60px 0 80px; }
+    .proj-rows { padding: 0 20px; gap: 60px; margin-top: 40px; }
+    .proj-row { grid-template-columns: 1fr; gap: 28px; }
+    .proj-row.flip { direction: ltr; }
+    .proj-visual { aspect-ratio: 16/9; border-radius: 16px; }
+    .proj-name { font-size: 1.6rem; }
     /* Stats */
     .stats-strip { padding: 40px 20px; gap: 0; flex-wrap: wrap; }
     .stat-item { min-width: 50%; padding: 16px 0; }
@@ -2681,11 +2684,12 @@
     <span class="work-eyebrow">2022 — present</span>
     <h2 class="work-title">Selected work</h2>
   </div>
-  <div class="proj-grid">
-    <!-- Clinikk -->
-    <div class="proj-card" id="folder-clinikk">
+  <div class="proj-rows">
+
+    <!-- Row 1: Visual left, text right — Clinikk -->
+    <div class="proj-row" id="folder-clinikk">
       <div class="proj-visual" style="background:linear-gradient(135deg,#f2c4be 0%,#d97060 100%)">
-        <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
+        <svg viewBox="0 0 38 38" fill="none">
           <rect x="16" y="8" width="6" height="22" rx="3" fill="rgba(255,255,255,.9)"/>
           <rect x="8" y="16" width="22" height="6" rx="3" fill="rgba(255,255,255,.9)"/>
         </svg>
@@ -2694,16 +2698,16 @@
       <div class="proj-info">
         <div class="proj-co">Clinikk · 2022–2023</div>
         <h3 class="proj-name">OPD Claims</h3>
-        <p class="proj-desc">Redesigned the claims flow for first-time insurance users — reducing drop-off and building trust at every step.</p>
+        <p class="proj-desc">Redesigned the reimbursement flow for first-time insurance users — reducing drop-off and building trust at every step.</p>
         <div class="proj-metric">↑ 50% tab engagement</div>
-        <button class="proj-cta" onclick="document.getElementById('folder-clinikk').click()">View case study →</button>
+        <button class="proj-cta" onclick="openPDF('folder-clinikk')">View case study →</button>
       </div>
     </div>
 
-    <!-- Marzi -->
-    <div class="proj-card" id="folder-marzi">
+    <!-- Row 2: Text left, visual right — Marzi -->
+    <div class="proj-row flip" id="folder-marzi">
       <div class="proj-visual" style="background:linear-gradient(135deg,#c4a0b4 0%,#8a3a58 100%)">
-        <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
+        <svg viewBox="0 0 38 38" fill="none">
           <circle cx="13" cy="14" r="5" fill="rgba(255,255,255,.9)"/>
           <circle cx="25" cy="14" r="5" fill="rgba(255,255,255,.9)"/>
           <path d="M4 30c0-5 4-8 9-8s9 3 9 8" stroke="rgba(255,255,255,.9)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
@@ -2715,15 +2719,15 @@
         <div class="proj-co">Marzi · 2025</div>
         <h3 class="proj-name">Community App</h3>
         <p class="proj-desc">Designed the welcome journey for India's 50+ demographic — onboarding that earns trust before asking for anything.</p>
-        <div class="proj-metric">Welcome journey · Shipping Q2 2026</div>
-        <button class="proj-cta" onclick="document.getElementById('folder-marzi').click()">View case study →</button>
+        <div class="proj-metric">Shipping Q2 2026</div>
+        <button class="proj-cta" onclick="openPDF('folder-marzi')">View case study →</button>
       </div>
     </div>
 
-    <!-- EduFund -->
-    <div class="proj-card">
+    <!-- Row 3: Visual left, text right — EduFund -->
+    <div class="proj-row">
       <div class="proj-visual" style="background:linear-gradient(135deg,#a8ccbc 0%,#3d7a62 100%)">
-        <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
+        <svg viewBox="0 0 38 38" fill="none">
           <rect x="8"  y="22" width="6" height="10" rx="2" fill="rgba(255,255,255,.9)"/>
           <rect x="16" y="16" width="6" height="16" rx="2" fill="rgba(255,255,255,.9)"/>
           <rect x="24" y="19" width="6" height="13" rx="2" fill="rgba(255,255,255,.9)"/>
@@ -2734,16 +2738,16 @@
       <div class="proj-info">
         <div class="proj-co">EduFund · 2023–2024</div>
         <h3 class="proj-name">EduFund Platform</h3>
-        <p class="proj-desc">Simplified KYC and investment flows for first-generation investors navigating education finance.</p>
+        <p class="proj-desc">Simplified KYC and investment flows for first-generation investors navigating education finance for the first time.</p>
         <div class="proj-metric">↑ 5% conversion</div>
         <button class="proj-cta proj-cta--locked">Coming soon</button>
       </div>
     </div>
 
-    <!-- Kwesto -->
-    <div class="proj-card" id="folder-kwesto">
+    <!-- Row 4: Text left, visual right — Kwesto -->
+    <div class="proj-row flip" id="folder-kwesto">
       <div class="proj-visual" style="background:linear-gradient(135deg,#f0d898 0%,#c89840 100%)">
-        <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
+        <svg viewBox="0 0 38 38" fill="none">
           <path d="M19 7 C13 7 9 11 9 16 C9 20 12 23 14 25 L14 28 L24 28 L24 25 C26 23 29 20 29 16 C29 11 25 7 19 7Z" fill="rgba(255,255,255,.9)"/>
           <rect x="14" y="29" width="10" height="3" rx="1.5" fill="rgba(255,255,255,.7)"/>
           <rect x="15" y="33" width="8" height="2" rx="1" fill="rgba(255,255,255,.5)"/>
@@ -2755,7 +2759,7 @@
         <h3 class="proj-name">Kwesto</h3>
         <p class="proj-desc">Built from zero — product strategy, IA, and interface design for a community knowledge platform.</p>
         <div class="proj-metric">0→1 MVP shipped</div>
-        <button class="proj-cta" onclick="document.getElementById('folder-kwesto').click()">View case study →</button>
+        <button class="proj-cta" onclick="openPDF('folder-kwesto')">View case study →</button>
       </div>
     </div>
 
