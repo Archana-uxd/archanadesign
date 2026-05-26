@@ -2475,17 +2475,14 @@
     .about-inner { font-size: 1.05rem; }
     .about-sticky-wrap { display: none; }
 
-    /* Finder / Work */
-    .finder-window { margin: 0 16px; border-radius: 12px; }
-    .finder-body { flex-direction: column; min-height: unset; }
-    .finder-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(0,0,0,.08); padding: 12px 16px; flex-direction: row; flex-wrap: wrap; gap: 8px; }
-    .finder-sidebar-item { padding: 6px 12px; border-radius: 20px; font-size: .78rem; }
-    .finder-main { padding: 16px; }
-    .finder-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 8px 0; }
-    .folder-item { padding: 12px 8px; }
-    .ios-icon { width: 60px; height: 60px; border-radius: 16px; }
-    .folder-name { font-size: .78rem; }
-    .folder-metric { font-size: .68rem; }
+    /* Work / Project cards */
+    .work { padding: 60px 20px 80px; }
+    .proj-grid { grid-template-columns: 1fr; gap: 20px; }
+    .proj-visual { height: 160px; }
+    /* Stats */
+    .stats-strip { padding: 40px 20px; gap: 0; flex-wrap: wrap; }
+    .stat-item { min-width: 50%; padding: 16px 0; }
+    .stat-item + .stat-item::before { display: none; }
 
     /* Playground / Bulletin board */
     .playground { padding: 60px 20px 80px; }
@@ -2508,6 +2505,8 @@
   }
 
   </style>
+  <!-- Analytics: Plausible — privacy-friendly, no cookies -->
+  <script defer data-domain="archana-uxd.github.io" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 <div id="cursor" aria-hidden="true"></div>
@@ -2682,113 +2681,84 @@
     <span class="work-eyebrow">2022 — present</span>
     <h2 class="work-title">Selected work</h2>
   </div>
-  <div class="finder-window">
-    <div class="finder-titlebar">
-      <div class="fdot r"></div>
-      <div class="fdot a"></div>
-      <div class="fdot g"></div>
-      <div class="finder-title-text">~/archana/projects</div>
-    </div>
-
-    <div class="finder-body">
-      <div class="finder-sidebar">
-        <span class="sidebar-label">Favourites</span>
-        <div class="sidebar-item active">
-          <svg class="sidebar-icon" viewBox="0 0 16 16" fill="none">
-            <path d="M1 5.5Q1 4 2.5 4L5.5 4Q6.5 4 7 5L8 6.5L14 6.5Q15 6.5 15 7.5L15 13Q15 14 14 14L2 14Q1 14 1 13Z" fill="currentColor" opacity=".9"/>
-          </svg>
-          Projects
-        </div>
-        <div class="sidebar-item">
-          <svg class="sidebar-icon" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
-            <circle cx="8" cy="8" r="1.8" fill="currentColor" opacity=".6"/>
-          </svg>
-          Playground
-        </div>
-        <div class="sidebar-item">
-          <svg class="sidebar-icon" viewBox="0 0 16 16" fill="none">
-            <path d="M8 2L9.6 6.2H14L10.6 8.8L11.9 13L8 10.4L4.1 13L5.4 8.8L2 6.2H6.4Z" fill="currentColor" opacity=".7"/>
-          </svg>
-          Achievements
-        </div>
-        <div class="sidebar-divider"></div>
-        <span class="sidebar-label">About</span>
-        <div class="sidebar-item">
-          <svg class="sidebar-icon" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="5.5" r="2.5" fill="currentColor" opacity=".7"/>
-            <path d="M3 13.5C3 10.7 5.2 9 8 9C10.8 9 13 10.7 13 13.5" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-          </svg>
-          Resume
-        </div>
+  <div class="proj-grid">
+    <!-- Clinikk -->
+    <div class="proj-card" id="folder-clinikk">
+      <div class="proj-visual" style="background:linear-gradient(135deg,#f2c4be 0%,#d97060 100%)">
+        <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
+          <rect x="16" y="8" width="6" height="22" rx="3" fill="rgba(255,255,255,.9)"/>
+          <rect x="8" y="16" width="22" height="6" rx="3" fill="rgba(255,255,255,.9)"/>
+        </svg>
+        <span class="proj-tag">Healthcare</span>
       </div>
-
-      <div class="finder-main">
-        <div class="finder-path">~/archana/projects &nbsp;›&nbsp; 5 items</div>
-        <div class="finder-grid">
-
-          <div class="folder-item" id="folder-clinikk">
-            <div class="ios-icon ios-coral">
-              <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-                <rect x="16" y="8" width="6" height="22" rx="3" fill="rgba(255,255,255,.9)"/>
-                <rect x="8" y="16" width="22" height="6" rx="3" fill="rgba(255,255,255,.9)"/>
-              </svg>
-            </div>
-            <div class="folder-name">OPD Claims<span>Clinikk · Healthcare</span><span class="folder-metric">↑ 50% tab engagement</span></div>
-          </div>
-
-          <div class="folder-item" id="folder-marzi">
-            <div class="ios-icon ios-maroon">
-              <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-                <circle cx="13" cy="14" r="5" fill="rgba(255,255,255,.9)"/>
-                <circle cx="25" cy="14" r="5" fill="rgba(255,255,255,.9)"/>
-                <path d="M4 30c0-5 4-8 9-8s9 3 9 8" stroke="rgba(255,255,255,.9)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                <path d="M20 30c0-5 4-8 9-8" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-              </svg>
-            </div>
-            <div class="folder-name">Community App<span>Marzi · 50+</span><span class="folder-metric">Welcome journey · 2025</span></div>
-          </div>
-
-          <div class="folder-item">
-            <div class="ios-icon ios-forest">
-              <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-                <rect x="8"  y="22" width="6" height="10" rx="2" fill="rgba(255,255,255,.9)"/>
-                <rect x="16" y="16" width="6" height="16" rx="2" fill="rgba(255,255,255,.9)"/>
-                <rect x="24" y="19" width="6" height="13" rx="2" fill="rgba(255,255,255,.9)"/>
-                <path d="M10 18 L19 11 L27 15" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              </svg>
-            </div>
-            <div class="folder-name">EduFund<span>Fintech Platform</span><span class="folder-metric">↑ 5% conversion</span></div>
-          </div>
-
-          <div class="folder-item" id="folder-kwesto">
-            <div class="ios-icon ios-amber">
-              <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-                <path d="M19 7 C13 7 9 11 9 16 C9 20 12 23 14 25 L14 28 L24 28 L24 25 C26 23 29 20 29 16 C29 11 25 7 19 7Z" fill="rgba(255,255,255,.9)"/>
-                <rect x="14" y="29" width="10" height="3" rx="1.5" fill="rgba(255,255,255,.7)"/>
-                <rect x="15" y="33" width="8" height="2" rx="1" fill="rgba(255,255,255,.5)"/>
-              </svg>
-            </div>
-            <div class="folder-name">Kwesto<span>0→1 MVP</span></div>
-          </div>
-
-          <div class="folder-item" onclick="document.getElementById('lens').scrollIntoView({behavior:'smooth'})" style="cursor:pointer">
-            <div class="ios-icon ios-green">
-              <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-                <rect x="6" y="13" width="26" height="18" rx="4" fill="rgba(255,255,255,.85)"/>
-                <rect x="13" y="8" width="8" height="7" rx="2" fill="rgba(255,255,255,.7)"/>
-                <circle cx="19" cy="22" r="5.5" stroke="rgba(255,255,255,.4)" stroke-width="1.5" fill="rgba(255,255,255,.2)"/>
-                <circle cx="19" cy="22" r="2.5" fill="rgba(255,255,255,.9)"/>
-                <circle cx="27" cy="16" r="1.5" fill="rgba(255,255,255,.8)"/>
-              </svg>
-            </div>
-            <div class="folder-name">Through My Lens<span>Through My Lens · 11 photos</span></div>
-          </div>
-
-
-        </div>
+      <div class="proj-info">
+        <div class="proj-co">Clinikk · 2022–2023</div>
+        <h3 class="proj-name">OPD Claims</h3>
+        <p class="proj-desc">Redesigned the claims flow for first-time insurance users — reducing drop-off and building trust at every step.</p>
+        <div class="proj-metric">↑ 50% tab engagement</div>
+        <button class="proj-cta" onclick="document.getElementById('folder-clinikk').click()">View case study →</button>
       </div>
     </div>
+
+    <!-- Marzi -->
+    <div class="proj-card" id="folder-marzi">
+      <div class="proj-visual" style="background:linear-gradient(135deg,#c4a0b4 0%,#8a3a58 100%)">
+        <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
+          <circle cx="13" cy="14" r="5" fill="rgba(255,255,255,.9)"/>
+          <circle cx="25" cy="14" r="5" fill="rgba(255,255,255,.9)"/>
+          <path d="M4 30c0-5 4-8 9-8s9 3 9 8" stroke="rgba(255,255,255,.9)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M20 30c0-5 4-8 9-8" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+        <span class="proj-tag">Community · 50+</span>
+      </div>
+      <div class="proj-info">
+        <div class="proj-co">Marzi · 2025</div>
+        <h3 class="proj-name">Community App</h3>
+        <p class="proj-desc">Designed the welcome journey for India's 50+ demographic — onboarding that earns trust before asking for anything.</p>
+        <div class="proj-metric">Welcome journey · Shipping Q2 2026</div>
+        <button class="proj-cta" onclick="document.getElementById('folder-marzi').click()">View case study →</button>
+      </div>
+    </div>
+
+    <!-- EduFund -->
+    <div class="proj-card">
+      <div class="proj-visual" style="background:linear-gradient(135deg,#a8ccbc 0%,#3d7a62 100%)">
+        <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
+          <rect x="8"  y="22" width="6" height="10" rx="2" fill="rgba(255,255,255,.9)"/>
+          <rect x="16" y="16" width="6" height="16" rx="2" fill="rgba(255,255,255,.9)"/>
+          <rect x="24" y="19" width="6" height="13" rx="2" fill="rgba(255,255,255,.9)"/>
+          <path d="M10 18 L19 11 L27 15" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span class="proj-tag">Fintech</span>
+      </div>
+      <div class="proj-info">
+        <div class="proj-co">EduFund · 2023–2024</div>
+        <h3 class="proj-name">EduFund Platform</h3>
+        <p class="proj-desc">Simplified KYC and investment flows for first-generation investors navigating education finance.</p>
+        <div class="proj-metric">↑ 5% conversion</div>
+        <button class="proj-cta proj-cta--locked">Coming soon</button>
+      </div>
+    </div>
+
+    <!-- Kwesto -->
+    <div class="proj-card" id="folder-kwesto">
+      <div class="proj-visual" style="background:linear-gradient(135deg,#f0d898 0%,#c89840 100%)">
+        <svg width="56" height="56" viewBox="0 0 38 38" fill="none">
+          <path d="M19 7 C13 7 9 11 9 16 C9 20 12 23 14 25 L14 28 L24 28 L24 25 C26 23 29 20 29 16 C29 11 25 7 19 7Z" fill="rgba(255,255,255,.9)"/>
+          <rect x="14" y="29" width="10" height="3" rx="1.5" fill="rgba(255,255,255,.7)"/>
+          <rect x="15" y="33" width="8" height="2" rx="1" fill="rgba(255,255,255,.5)"/>
+        </svg>
+        <span class="proj-tag">0→1 MVP</span>
+      </div>
+      <div class="proj-info">
+        <div class="proj-co">Kwesto · 2024</div>
+        <h3 class="proj-name">Kwesto</h3>
+        <p class="proj-desc">Built from zero — product strategy, IA, and interface design for a community knowledge platform.</p>
+        <div class="proj-metric">0→1 MVP shipped</div>
+        <button class="proj-cta" onclick="document.getElementById('folder-kwesto').click()">View case study →</button>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2811,6 +2781,26 @@
 </div>
 
 <!-- ── PLAYGROUND ──────────────────────────────────────────── -->
+<!-- ── STATS STRIP ─────────────────────────────────────────── -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">40K+</div>
+    <div class="stat-label">Users reached</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Products shipped</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3.5+</div>
+    <div class="stat-label">Years of craft</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">0→1</div>
+    <div class="stat-label">MVPs built</div>
+  </div>
+</div>
+
 <section class="playground reveal" id="playground">
   <div class="playground-header">
     <span class="playground-eyebrow">Playground</span>
