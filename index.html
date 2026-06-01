@@ -9,7 +9,7 @@
   <title>Archana Hiremath — Product Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Radio+Canada+Big:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Radio+Canada+Big:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2512,6 +2512,90 @@
     .terminal { display: none; }
   }
 
+  /* ══════════════════════════════════════════════════════════════
+     RECEIPT BLOCK — résumé "receipt" (Experience / Skills / Find Me)
+     Fully scoped under #rcpt so it never touches the green design.
+  ══════════════════════════════════════════════════════════════ */
+  #rcpt {
+    --rc-maroon:#8B1A1A; --rc-maroon-deep:#4A0D0D;
+    --rc-amber:#C77A12; --rc-amber-bright:#E8A020;
+    --rc-ink:#1C1917; --rc-ink-muted:#5C4033;
+    --rc-paper:#FDF9F4; --rc-dashed:rgba(139,26,26,0.22);
+    position:relative; z-index:1;
+    padding:64px 20px 88px;
+    display:flex; flex-direction:column; align-items:center;
+    font-family:'IBM Plex Mono','Courier New',monospace;
+  }
+  #rcpt .rc-eyebrow {
+    font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--rc-maroon); margin-bottom:22px; text-align:center;
+  }
+  #rcpt .rc-outer {
+    width:100%; max-width:430px; position:relative;
+    opacity:0; transform:translateY(24px) rotate(-0.4deg);
+    transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+    filter:drop-shadow(0 24px 60px rgba(74,13,13,0.18)) drop-shadow(0 4px 12px rgba(0,0,0,0.10));
+  }
+  #rcpt .rc-outer.revealed { opacity:1; transform:translateY(0) rotate(0deg); }
+  #rcpt .rc-torn { display:block; width:100%; }
+  #rcpt .rc-card {
+    width:100%; background:var(--rc-paper); color:var(--rc-ink);
+    font-size:13px; line-height:1.65; padding:26px 30px 30px; position:relative;
+  }
+  #rcpt .rc-card::after {
+    content:''; position:absolute; left:0; top:18%; height:64%; width:3px;
+    background:linear-gradient(to bottom,transparent,var(--rc-maroon),var(--rc-amber-bright),transparent);
+    border-radius:0 2px 2px 0; opacity:.6;
+  }
+  #rcpt .dash { border:none; border-top:1.5px dashed var(--rc-dashed); margin:16px 0; }
+  #rcpt .sec-label {
+    font-size:10.5px; font-weight:700; letter-spacing:.16em; color:var(--rc-maroon);
+    margin-bottom:10px; display:flex; align-items:center; gap:8px;
+  }
+  #rcpt .sec-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,var(--rc-dashed),transparent); }
+  #rcpt .col-heads {
+    display:flex; justify-content:space-between; font-size:10px; font-weight:700;
+    letter-spacing:.1em; color:var(--rc-maroon); opacity:.55; margin-bottom:8px;
+  }
+  #rcpt .col-heads-left { display:flex; gap:12px; }
+  #rcpt .col-qty { width:26px; text-align:right; }
+  #rcpt .line-item {
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:4px 6px; border-radius:3px; margin:0 -6px; transition:background .15s;
+  }
+  #rcpt .line-left { display:flex; gap:12px; flex:1; min-width:0; }
+  #rcpt .line-qty { width:26px; text-align:right; flex-shrink:0; color:var(--rc-maroon); font-weight:600; font-size:12px; }
+  #rcpt .line-body { flex:1; min-width:0; }
+  #rcpt .line-name { font-size:13px; color:var(--rc-ink); }
+  #rcpt .line-name.bold { font-weight:700; }
+  #rcpt .line-amt { flex-shrink:0; margin-left:12px; text-align:right; font-size:13px; color:var(--rc-ink); }
+  #rcpt .stars { color:var(--rc-amber-bright); letter-spacing:1px; }
+  #rcpt .stars .empty { opacity:.28; }
+  #rcpt .links-grid { display:flex; flex-direction:column; gap:7px; font-size:12px; }
+  #rcpt .link-row { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  #rcpt .link-label { color:var(--rc-ink-muted); font-size:11px; opacity:.7; }
+  #rcpt .link-val {
+    color:var(--rc-maroon); font-weight:500; border-bottom:1px dashed rgba(139,26,26,0.35);
+    padding-bottom:1px; font-size:11.5px; text-decoration:none; transition:opacity .15s;
+  }
+  #rcpt .link-val:hover, #rcpt .link-val:focus-visible { opacity:.65; outline:none; }
+  #rcpt .link-val:focus-visible { outline:2px solid var(--rc-maroon); outline-offset:3px; }
+  #rcpt .footer-quote {
+    text-align:center; font-size:13px; font-weight:700; font-style:italic;
+    color:var(--rc-ink); opacity:.82; margin:20px 0 16px;
+  }
+  #rcpt .barcode { display:flex; justify-content:center; align-items:flex-end; gap:2.5px; margin:0 auto 14px; max-width:210px; height:40px; }
+  #rcpt .bar { border-radius:1px; background:var(--rc-maroon); }
+  #rcpt .powered { text-align:center; font-size:10px; color:var(--rc-ink); opacity:.5; line-height:1.7; }
+
+  @media (max-width:480px) {
+    #rcpt { padding:48px 14px 64px; }
+    #rcpt .rc-card { padding:22px 22px 26px; font-size:12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #rcpt .rc-outer { transition:none; opacity:1; transform:none; }
+  }
+
   </style>
   <!-- Analytics: Plausible — privacy-friendly, no cookies -->
   <script defer data-domain="archana-uxd.github.io" src="https://plausible.io/js/script.js"></script>
@@ -2913,6 +2997,118 @@
         </div>
       </div>
     </div>
+
+  </div>
+</section>
+
+<!-- ── RECEIPT BLOCK (résumé on a receipt) ─────────────────────── -->
+<section id="rcpt" aria-label="Résumé summary — experience, skills, and contact">
+  <div class="rc-eyebrow">The short version — on a receipt</div>
+  <div class="rc-outer" id="rc-outer">
+
+    <!-- torn top edge -->
+    <svg class="rc-torn" viewBox="0 0 420 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path d="M0,22 L0,12 L10,0 L20,12 L30,2 L40,14 L50,4 L60,16 L70,3 L80,15 L90,5 L100,17 L110,2 L120,14 L130,6 L140,16 L150,1 L160,13 L170,5 L180,17 L190,3 L200,15 L210,4 L220,16 L230,2 L240,14 L250,7 L260,18 L270,3 L280,15 L290,5 L300,17 L310,2 L320,13 L330,6 L340,16 L350,4 L360,15 L370,3 L380,14 L390,5 L400,16 L410,2 L420,13 L420,22 Z" fill="#FDF9F4"/>
+    </svg>
+
+    <div class="rc-card">
+
+      <!-- EXPERIENCE -->
+      <h2 class="sec-label">EXPERIENCE SERVED</h2>
+      <div class="col-heads">
+        <div class="col-heads-left"><span class="col-qty">QTY</span><span>ITEM</span></div>
+        <span>AMT</span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">4</span><div class="line-body"><span class="line-name">Years in Product Design</span></div></div>
+        <span class="line-amt">4.00</span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">1</span><div class="line-body"><span class="line-name">Product (Marzi — 50+ community)</span></div></div>
+        <span class="line-amt">1.00</span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">3</span><div class="line-body"><span class="line-name">End-to-end Flows Shipped</span></div></div>
+        <span class="line-amt">3.00</span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">6</span><div class="line-body"><span class="line-name">User Research Studies</span></div></div>
+        <span class="line-amt">6.00</span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">1</span><div class="line-body"><span class="line-name">Design System Maintained</span></div></div>
+        <span class="line-amt">1.00</span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">2</span><div class="line-body"><span class="line-name">Prototyping (HTML + Figma)</span></div></div>
+        <span class="line-amt">2.00</span>
+      </div>
+
+      <hr class="dash" />
+
+      <!-- SKILLS -->
+      <h2 class="sec-label">SKILLS ON THE MENU</h2>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">1</span><div class="line-body"><span class="line-name">Product Design</span></div></div>
+        <span class="line-amt"><span class="stars" aria-label="3 out of 3">★★★</span></span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">1</span><div class="line-body"><span class="line-name">UX Research &amp; Synthesis</span></div></div>
+        <span class="line-amt"><span class="stars" aria-label="3 out of 3">★★★</span></span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">1</span><div class="line-body"><span class="line-name">Data-Informed Decisions</span></div></div>
+        <span class="line-amt"><span class="stars" aria-label="3 out of 3">★★★</span></span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">1</span><div class="line-body"><span class="line-name">Interaction Design</span></div></div>
+        <span class="line-amt"><span class="stars" aria-label="2 out of 3">★★<span class="empty">☆</span></span></span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">1</span><div class="line-body"><span class="line-name">HTML/CSS Prototyping</span></div></div>
+        <span class="line-amt"><span class="stars" aria-label="2 out of 3">★★<span class="empty">☆</span></span></span>
+      </div>
+      <div class="line-item">
+        <div class="line-left"><span class="line-qty">1</span><div class="line-body"><span class="line-name">Product Strategy</span></div></div>
+        <span class="line-amt"><span class="stars" aria-label="2 out of 3">★★<span class="empty">☆</span></span></span>
+      </div>
+
+      <hr class="dash" />
+
+      <!-- FIND ME AT -->
+      <h2 class="sec-label">FIND ME AT</h2>
+      <div class="links-grid">
+        <div class="link-row">
+          <span class="link-label">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/archanauxd/" target="_blank" rel="noopener" class="link-val">linkedin.com/in/archanauxd</a>
+        </div>
+        <div class="link-row">
+          <span class="link-label">Email</span>
+          <a href="mailto:archanauxd@gmail.com" class="link-val">archanauxd@gmail.com</a>
+        </div>
+        <div class="link-row">
+          <span class="link-label">Portfolio</span>
+          <a href="https://archana-uxd.github.io/archanadesign/" class="link-val">archana-uxd.github.io/archanadesign</a>
+        </div>
+        <div class="link-row">
+          <span class="link-label">Résumé</span>
+          <a href="archanadesign_resume.pdf" target="_blank" rel="noopener" class="link-val">Download ↓</a>
+        </div>
+      </div>
+
+      <hr class="dash" />
+
+      <!-- FOOTER QUOTE + BARCODE -->
+      <p class="footer-quote">“Not aspirational. Operational.”</p>
+      <div class="barcode" id="rc-barcode" aria-hidden="true"></div>
+      <p class="powered">Powered by: Coffee · Call Transcripts · Dovetail Tags<br />Thank you for your time.</p>
+
+    </div>
+
+    <!-- torn bottom edge -->
+    <svg class="rc-torn" viewBox="0 0 420 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <path d="M0,0 L0,10 L10,22 L20,10 L30,20 L40,8 L50,18 L60,6 L70,19 L80,7 L90,17 L100,5 L110,20 L120,8 L130,16 L140,6 L150,21 L160,9 L170,17 L180,5 L190,19 L200,7 L210,18 L220,6 L230,20 L240,8 L250,15 L260,4 L270,19 L280,7 L290,17 L300,5 L310,20 L320,9 L330,16 L340,6 L350,18 L360,7 L370,19 L380,8 L390,17 L400,6 L410,20 L420,9 L420,0 Z" fill="#FDF9F4"/>
+    </svg>
 
   </div>
 </section>
@@ -3319,6 +3515,44 @@ window.closeLens = function() {
     if (img) img.src = '';
   }, 300);
 };
+</script>
+
+<!-- ── RECEIPT BLOCK: barcode + scroll reveal ──────────────────── -->
+<script>
+(function () {
+  // Build the barcode bars
+  var container = document.getElementById('rc-barcode');
+  if (container) {
+    var widths  = [3,1.5,2,1.5,3,1.5,2,3,1.5,1.5,3,2,1.5,3,1.5,2,1.5,3,2,3,1.5,2,1.5,3,1.5,3,2,1.5,1.5,3];
+    var heights = [34,28,22,32,38,24,28,36,22,30,34,26,38,22,32,28,36,24,30,38,22,34,26,32,28,36,30,22,38,32];
+    widths.forEach(function (w, i) {
+      var bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.width  = w + 'px';
+      bar.style.height = heights[i] + 'px';
+      bar.style.opacity = i % 4 === 0 ? '1' : i % 4 === 1 ? '0.7' : i % 4 === 2 ? '0.5' : '0.85';
+      container.appendChild(bar);
+    });
+  }
+
+  // Reveal the receipt when it scrolls into view
+  var outer = document.getElementById('rc-outer');
+  if (outer) {
+    if (!('IntersectionObserver' in window)) {
+      outer.classList.add('revealed');
+    } else {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+      obs.observe(outer);
+    }
+  }
+})();
 </script>
 
 </body>
