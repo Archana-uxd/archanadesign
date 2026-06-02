@@ -117,6 +117,33 @@
       transform: translateY(-2px);
       background: rgba(255,255,255,0.14);
     }
+    .btn-secondary.copied {
+      background: rgba(232,160,32,0.18);
+      border-color: var(--amber);
+      color: var(--amber-light);
+    }
+
+    /* ═══════ TOAST ═══════ */
+    .toast {
+      position: fixed;
+      left: 50%; bottom: 92px;
+      transform: translateX(-50%) translateY(16px);
+      z-index: 200;
+      background: var(--ink); color: var(--paper);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.02em;
+      padding: 12px 20px; border-radius: 100px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      border: 1px solid rgba(232,160,32,0.4);
+      opacity: 0; pointer-events: none;
+      max-width: calc(100vw - 32px);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
 
     /* ═══════ HERO ═══════ */
     .hero {
@@ -232,9 +259,9 @@
 
     /* Meta */
     .meta { font-size: 13px; color: var(--ink-muted); }
-    .meta-row { display: flex; justify-content: space-between; padding: 5px 0; }
-    .meta-label { opacity: 0.5; }
-    .meta-val { font-weight: 600; color: var(--ink); }
+    .meta-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 5px 0; }
+    .meta-label { opacity: 0.5; flex-shrink: 0; }
+    .meta-val { font-weight: 600; color: var(--ink); text-align: right; }
 
     /* Industry tags */
     .industry-tags {
@@ -630,14 +657,28 @@
 
     /* ═══════ RESPONSIVE ═══════ */
     @media (max-width: 520px) {
-      .receipt { padding: 22px 22px 34px; font-size: 13px; }
-      .receipt-title { font-size: 36px; }
+      .hero { padding: 60px 20px 28px; }
+      .hero-name { font-size: clamp(34px, 11vw, 60px); }
+      .hero-bio { font-size: 15px; }
+      .receipt { padding: 22px 20px 34px; font-size: 13px; }
+      .receipt-title { font-size: clamp(34px, 12vw, 44px); }
       .receipt-metrics { grid-template-columns: repeat(2, 1fr); }
       .r-metric:nth-child(2n) { border-right: none; }
       .r-metric:nth-child(n+3) { border-top: 1px solid var(--dashed); }
       .r-metric:nth-child(3) { border-right: 1px solid var(--dashed); }
-      .sticky-ctas { gap: 8px; padding: 12px 16px 20px; }
+      .meta-row { gap: 12px; }
+      .sticky-ctas { gap: 8px; padding: 12px 16px 18px; }
       .btn-primary, .btn-secondary { padding: 11px 18px; font-size: 11px; }
+      .toast { bottom: 84px; font-size: 11px; padding: 10px 16px; }
+    }
+
+    @media (max-width: 360px) {
+      .hero-name { font-size: clamp(34px, 14vw, 40px); }
+      .receipt { padding: 20px 16px 30px; }
+      .meta { font-size: 12px; }
+      .case-title { font-size: 13px; }
+      .case-detail { font-size: 10px; }
+      .btn-primary, .btn-secondary { padding: 10px 14px; font-size: 10px; letter-spacing: 0.04em; }
     }
   </style>
 </head>
@@ -993,19 +1034,64 @@
 
 <script>
   /* ═══════ COPY EMAIL ═══════ */
+  const EMAIL = 'archanauxd@gmail.com';
+
+  function showToast(msg) {
+    let t = document.getElementById('toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'toast';
+      t.className = 'toast';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function flashCopied(btn) {
+    const lbl = document.getElementById('email-label');
+    const original = 'COPY EMAIL';
+    lbl.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    if (navigator.vibrate) navigator.vibrate(15);
+    showToast('✓ Email copied — ' + EMAIL);
+    clearTimeout(btn._timer);
+    btn._timer = setTimeout(() => {
+      lbl.textContent = original;
+      btn.classList.remove('copied');
+    }, 2000);
+  }
+
   function copyEmail(btn) {
-    navigator.clipboard.writeText('archanauxd@gmail.com').then(() => {
-      const lbl = document.getElementById('email-label');
-      lbl.textContent = 'COPIED ✓';
-      btn.style.background = 'rgba(232,160,32,0.15)';
-      btn.style.borderColor = 'var(--amber)';
-      setTimeout(() => { lbl.textContent = 'COPY EMAIL'; btn.style.background = ''; btn.style.borderColor = ''; }, 2000);
-    });
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(EMAIL)
+        .then(() => flashCopied(btn))
+        .catch(() => { if (fallbackCopy(EMAIL)) flashCopied(btn); else showToast('Copy failed — ' + EMAIL); });
+    } else {
+      if (fallbackCopy(EMAIL)) flashCopied(btn);
+      else showToast('Copy failed — ' + EMAIL);
+    }
   }
 
   /* ═══════ CASE STUDY LINKS ═══════ */
   const caseLinks = {
-    clinikk: 'https://www.figma.com/design/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=1-23',
+    clinikk: 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=1-23&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
     'marzi-onboarding': 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-4879&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1',
     'marzi-community': 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-9962&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
     teleconsult: 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-12723&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1'
