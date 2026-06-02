@@ -16,7 +16,7 @@
     :root {
       --maroon: #8B1A1A;
       --maroon-dark: #6B1212;
-      --maroon-deep: #3A0A0A;
+      --maroon-deep: #4A0D0D;
       --amber: #E8A020;
       --amber-light: #F5C842;
       --amber-pale: #FFF3C4;
@@ -58,21 +58,21 @@
       100% { opacity: 0; transform: translateY(-10vh) rotate(360deg); }
     }
 
-    /* Warm ambient glow */
+    /* Warm maroon radial glow (from portfolio v2) */
     .bg-glow {
       position: fixed; inset: 0;
-      background:
-        radial-gradient(ellipse 70% 40% at 50% 15%, rgba(160,20,20,0.25) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(232,160,32,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 10% 60%, rgba(139,26,26,0.1) 0%, transparent 50%);
+      background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(180,30,30,0.35) 0%, transparent 70%);
       pointer-events: none; z-index: 0;
     }
 
-    /* Subtle grain */
+    /* Dotted texture (from portfolio v2) */
     .bg-grain {
       position: fixed; inset: 0;
-      opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-image:
+        radial-gradient(circle, rgba(232,160,32,0.07) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 28px 28px, 14px 14px;
+      background-position: 0 0, 7px 7px;
       pointer-events: none; z-index: 0;
     }
 
@@ -215,7 +215,7 @@
     }
 
     .receipt-outer {
-      width: 100%; max-width: 460px;
+      width: 100%; max-width: 500px;
       position: relative;
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -320,7 +320,7 @@
     }
     .case-body { flex: 1; min-width: 0; }
     .case-title { font-size: 14px; font-weight: 700; color: var(--ink); display: block; }
-    .case-detail { font-size: 11px; color: var(--amber); opacity: 0.85; margin-top: 2px; }
+    .case-detail { font-size: 11px; color: var(--maroon); opacity: 0.78; margin-top: 2px; }
     .case-arrow {
       width: 20px; height: 20px; border-radius: 50%;
       background: var(--maroon); color: #fff;
