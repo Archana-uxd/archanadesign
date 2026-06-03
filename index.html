@@ -6,10 +6,10 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>Archana Hiremath — Product Designer</title>
+  <title>Archana Hiremath — Senior Product Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,700;1,9..144,800;1,9..144,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,700;1,9..144,800;1,9..144,900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -30,7 +30,7 @@
     ::selection { background: var(--maroon); color: #fff; }
 
     body {
-      font-family: 'IBM Plex Mono', 'Courier New', monospace;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--maroon-deep);
       min-height: 100vh;
       overflow-x: hidden;
@@ -90,7 +90,7 @@
     .sticky-ctas > * { pointer-events: auto; }
 
     .btn-primary {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: clamp(12px, 3.2vw, 14px); font-weight: 700; letter-spacing: 0.08em;
       background: var(--amber); color: #1C1917;
       border: none; padding: 13px 26px; border-radius: 100px;
@@ -104,7 +104,7 @@
     }
 
     .btn-secondary {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: clamp(12px, 3.2vw, 14px); font-weight: 700; letter-spacing: 0.08em;
       background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8);
       border: 1px solid rgba(255,255,255,0.15);
@@ -130,7 +130,7 @@
       transform: translateX(-50%) translateY(16px);
       z-index: 200;
       background: var(--ink); color: var(--paper);
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 12px; font-weight: 500; letter-spacing: 0.02em;
       padding: 12px 20px; border-radius: 100px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.35);
@@ -160,7 +160,7 @@
     }
 
     .hero-name {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(52px, 13vw, 96px);
       font-weight: 800; line-height: 0.92;
       color: #fff; letter-spacing: -0.02em;
@@ -182,7 +182,7 @@
     }
 
     .hero-bio {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: clamp(16px, 4.4vw, 19px); line-height: 1.65;
       color: rgba(255,255,255,0.5);
       max-width: 420px; margin: 0 auto 44px;
@@ -226,7 +226,7 @@
     .receipt {
       width: 100%;
       background: var(--paper); color: var(--ink);
-      font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: clamp(16px, 4.4vw, 20px); line-height: 1.55;
       padding: 30px 34px 44px;
       position: relative;
@@ -377,7 +377,7 @@
     .r-metric:nth-child(n+4) { border-top: 1px solid var(--dashed); }
 
     .r-metric-val {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: 16px; font-weight: 800; color: var(--maroon);
       line-height: 1.1;
     }
@@ -394,13 +394,13 @@
       padding: 0 2px 9px; text-transform: uppercase;
     }
     .line-item {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 8px 16px; flex-wrap: wrap;
-      padding: 11px 2px;
+      display: flex; flex-direction: column; align-items: flex-start;
+      gap: 8px;
+      padding: 12px 2px;
       border-bottom: 1px dotted var(--dashed);
     }
     .line-item:last-child { border-bottom: none; }
-    .li-name { font-size: clamp(16px, 4.4vw, 20px); font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .li-name { font-size: clamp(15px, 4vw, 18px); font-weight: 600; color: var(--ink); }
     .li-desc { font-size: clamp(13px, 3.5vw, 15px); color: var(--ink-muted); opacity: 0.6; }
     .li-leader {
       flex: 1; border-bottom: 1px dotted var(--dashed);
@@ -521,21 +521,87 @@
       opacity: 0.5; margin-bottom: 10px;
     }
     .section-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(30px, 8vw, 44px);
       font-weight: 800; color: #fff;
       line-height: 1.1; margin-bottom: 16px;
     }
     .section-desc {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: clamp(16px, 4.4vw, 19px); line-height: 1.7;
       color: rgba(255,255,255,0.45);
       margin-bottom: 24px;
     }
 
+    /* ═══════ WORK CARDS ═══════ */
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .work-card {
+      display: flex; flex-direction: column;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .work-card:hover, .work-card:focus-visible {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(232,160,32,0.35);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+      outline: none;
+    }
+    .work-thumb {
+      width: 100%; aspect-ratio: 4 / 3;
+      background: rgba(232,160,32,0.10);
+      overflow: hidden;
+    }
+    .work-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .work-card:hover .work-thumb img { transform: scale(1.04); }
+    .work-meta { padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .work-eyebrow {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--amber);
+    }
+    .work-title {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(18px, 2.2vw, 22px); font-weight: 700;
+      color: #fff; letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .work-desc {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px; line-height: 1.6;
+      color: rgba(255,255,255,0.62);
+      margin-top: 4px;
+    }
+    .work-cta {
+      margin-top: 8px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+      color: var(--amber);
+      transition: gap 0.2s, color 0.2s;
+    }
+    .work-card:hover .work-cta { color: var(--amber-light); }
+    @media (max-width: 760px) {
+      .work-grid { grid-template-columns: 1fr; gap: 16px; }
+      .work-meta { padding: 20px; }
+    }
+
     /* About me content */
     .about-text {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: clamp(16px, 4.4vw, 19px); line-height: 1.75;
       color: rgba(255,255,255,0.55);
       margin-bottom: 24px;
@@ -550,7 +616,7 @@
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
       color: rgba(255,255,255,0.5);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
     }
 
     /* Process steps */
@@ -578,7 +644,7 @@
       margin-bottom: 4px; letter-spacing: 0.04em;
     }
     .step-detail {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       font-size: 13px; line-height: 1.6;
       color: rgba(255,255,255,0.35);
     }
@@ -716,19 +782,25 @@
 
     /* ═══════ RESPONSIVE ═══════ */
     @media (max-width: 520px) {
-      .hero { padding: 60px 20px 28px; }
+      .hero { padding: 56px 16px 24px; }
       .hero-name { font-size: clamp(34px, 11vw, 60px); }
-      .receipt { padding: 24px 22px 36px; }
+      .receipt-wrap { padding: 0 16px; }
+      .receipt { padding: 24px 20px 32px; }
       .meta-row { gap: 12px; }
-      .sticky-ctas { gap: 8px; padding: 12px 16px 18px; }
+      .sticky-ctas { gap: 8px; padding: 12px 16px 16px; }
       .btn-primary, .btn-secondary { padding: 12px 18px; }
-      .toast { bottom: 84px; padding: 10px 16px; }
+      .toast { bottom: 80px; padding: 10px 16px; }
+      .scroll-sections { padding: 0 16px; }
+      .scroll-section { padding: 48px 0; }
     }
 
     @media (max-width: 360px) {
+      .hero { padding: 48px 12px 20px; }
       .hero-name { font-size: clamp(32px, 14vw, 40px); }
-      .receipt { padding: 22px 16px 32px; }
+      .receipt-wrap { padding: 0 12px; }
+      .receipt { padding: 20px 16px 28px; }
       .btn-primary, .btn-secondary { padding: 11px 14px; letter-spacing: 0.04em; }
+      .scroll-sections { padding: 0 12px; }
     }
   </style>
 </head>
@@ -741,7 +813,7 @@
 
 <!-- ═══════ HERO ═══════ -->
 <section class="hero">
-  <div class="hero-eyebrow">Product Designer</div>
+  <div class="hero-eyebrow">Senior Product Designer</div>
   <h1 class="hero-name">
     <span>Archana</span>
     <span class="shimmer">Hiremath</span>
@@ -809,61 +881,8 @@
 
       <hr class="dash" />
 
-      <!-- Case studies -->
-      <div>
-        <div class="sec-label">WORK</div>
-
-        <div class="case-line" onclick="openCase('case1')">
-          <div class="case-left">
-            <img src="01.png" alt="" class="case-thumb" loading="lazy" />
-            <div class="case-body">
-              <span class="case-title">Rapido × Clinikk Install Journey</span>
-              <div class="case-detail">Clinikk · ~20% → ~50% app installs in 30 days</div>
-            </div>
-          </div>
-          <span class="case-arrow" aria-hidden="true"><img src="arrow.svg" alt="" /></span>
-        </div>
-
-        <div class="case-line" onclick="openCase('case2')">
-          <div class="case-left">
-            <img src="02.png" alt="" class="case-thumb" loading="lazy" />
-            <div class="case-body">
-              <span class="case-title">Designing Trust into Reimbursements</span>
-              <div class="case-detail">Clinikk · for first-time insurance users</div>
-            </div>
-          </div>
-          <span class="case-arrow" aria-hidden="true"><img src="arrow.svg" alt="" /></span>
-        </div>
-
-        <div class="case-line" onclick="openCase('case3')">
-          <div class="case-left">
-            <img src="03.png" alt="" class="case-thumb" loading="lazy" />
-            <div class="case-body">
-              <span class="case-title">EduFund — Motivation Systems</span>
-              <div class="case-detail">EduFund · habit loops for kids, structure for parents</div>
-            </div>
-          </div>
-          <span class="case-arrow" aria-hidden="true"><img src="arrow.svg" alt="" /></span>
-        </div>
-
-        <div class="case-line" onclick="openCase('case4')">
-          <div class="case-left">
-            <img src="04.png" alt="" class="case-thumb" loading="lazy" />
-            <div class="case-body">
-              <span class="case-title">Kwesto — Playful Learning App</span>
-              <div class="case-detail">Mobile · growth through challenges &amp; life skills</div>
-            </div>
-          </div>
-          <span class="case-arrow" aria-hidden="true"><img src="arrow.svg" alt="" /></span>
-        </div>
-      </div>
-
-      <hr class="dash" />
-
       <!-- Skills on the Menu -->
       <div class="sec-label">SKILLS ON THE MENU</div>
-      <div class="col-heads"><span>Skill</span><span>Level</span></div>
-
       <div class="line-item">
         <span class="li-name">Product Design</span>
         <span class="li-stars" data-rating="5">
@@ -998,10 +1017,59 @@
 <!-- ═══════ SCROLL SECTIONS ═══════ -->
 <div class="scroll-sections">
 
+  <!-- WORK -->
+  <section class="scroll-section" id="work">
+    <div class="section-num">01 — SELECTED WORK</div>
+    <h2 class="section-title">Selected work.</h2>
+    <p class="section-desc">Four shipped projects from the last 18 months — research-led, measured, and tied to real business outcomes.</p>
+
+    <div class="work-grid">
+      <a class="work-card" href="https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=1-23&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener" aria-label="Open Rapido × Clinikk case study">
+        <div class="work-thumb"><img src="01.png" alt="" loading="lazy" /></div>
+        <div class="work-meta">
+          <span class="work-eyebrow">Clinikk</span>
+          <h3 class="work-title">Rapido × Clinikk Install Journey</h3>
+          <p class="work-desc">~20% → ~50% app installs in 30 days. Redesigned the post-purchase onboarding across sales calls and WhatsApp.</p>
+          <span class="work-cta">Open case study →</span>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-4879&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener" aria-label="Open Reimbursements case study">
+        <div class="work-thumb"><img src="02.png" alt="" loading="lazy" /></div>
+        <div class="work-meta">
+          <span class="work-eyebrow">Clinikk</span>
+          <h3 class="work-title">Designing Trust into Reimbursements</h3>
+          <p class="work-desc">For first-time insurance users — a step-by-step claim flow that explained jargon and showed live status at every stage.</p>
+          <span class="work-cta">Open case study →</span>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-9962&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener" aria-label="Open EduFund case study">
+        <div class="work-thumb"><img src="03.png" alt="" loading="lazy" /></div>
+        <div class="work-meta">
+          <span class="work-eyebrow">EduFund</span>
+          <h3 class="work-title">EduFund — Motivation Systems</h3>
+          <p class="work-desc">Habit loops for kids and structure for parents. Designed a goal-driven activity system that balanced fun and accountability.</p>
+          <span class="work-cta">Open case study →</span>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-12723&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener" aria-label="Open Kwesto case study">
+        <div class="work-thumb"><img src="04.png" alt="" loading="lazy" /></div>
+        <div class="work-meta">
+          <span class="work-eyebrow">Mobile</span>
+          <h3 class="work-title">Kwesto — Playful Learning App</h3>
+          <p class="work-desc">Growth through challenges and essential life skills. Built the playful, parent-co-piloted learning experience end to end.</p>
+          <span class="work-cta">Open case study →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <!-- ABOUT ME -->
   <section class="scroll-section" id="about">
-    <div class="section-num">01 — ABOUT THE CHEF</div>
-    <h2 class="section-title">A little<br>about me.</h2>
+    <div class="section-num">02 — ABOUT</div>
+    <h2 class="section-title">About me.</h2>
     <div class="about-text">
       I'm a product designer based in Bengaluru who believes every pixel should earn its place through evidence, not assumption. My work lives at the intersection of design, research, and product thinking.
     </div>
@@ -1023,7 +1091,7 @@
 
   <!-- TOOLKIT -->
   <section class="scroll-section" id="tools">
-    <div class="section-num">02 — TOOLKIT</div>
+    <div class="section-num">03 — TOOLKIT</div>
     <h2 class="section-title">What I<br>work with.</h2>
     <p class="section-desc">Not aspirational. Operational.</p>
 
@@ -1251,66 +1319,9 @@
     obs.observe(wrap);
   }
 
-  /* ═══════ AUDIO ENGINE ═══════ */
-  let audioCtx = null;
-  function getCtx() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    return audioCtx;
-  }
-
-  function playPrintTick() {
-    try {
-      const ctx = getCtx();
-      const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.03), ctx.sampleRate);
-      const data = buf.getChannelData(0);
-      for (let i = 0; i < data.length; i++) {
-        const env = 1 - i / data.length;
-        data[i] = (Math.random() * 2 - 1) * env * 0.15;
-      }
-      const src = ctx.createBufferSource(); src.buffer = buf;
-      const filt = ctx.createBiquadFilter();
-      filt.type = 'bandpass'; filt.frequency.value = 2200; filt.Q.value = 1.2;
-      const gain = ctx.createGain(); gain.gain.value = 0.3;
-      src.connect(filt); filt.connect(gain); gain.connect(ctx.destination);
-      src.start();
-    } catch(e) {}
-  }
-
-  function playStamp() {
-    try {
-      const ctx = getCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine'; osc.frequency.setValueAtTime(220, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.15);
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.start(); osc.stop(ctx.currentTime + 0.15);
-    } catch(e) {}
-  }
-
-  /* Print sound on scroll — throttled */
-  let lastPrintSound = 0;
-  function onScroll() {
-    const now = Date.now();
-    if (now - lastPrintSound > 180) {
-      const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      if (scrollPct > 0.05 && scrollPct < 0.95) {
-        playPrintTick();
-      }
-      lastPrintSound = now;
-    }
-  }
-
-  /* Unlock audio on first interaction */
-  let audioUnlocked = false;
-  function unlockAudio() {
-    if (audioUnlocked) return;
-    audioUnlocked = true;
-    getCtx();
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }
+  /* (audio engine removed — silent portfolio) */
+  function playStamp() { /* no-op */ }
+  function unlockAudio() { /* no-op */ }
 
   /* ═══════ THANK YOU COIN RAIN ═══════ */
   function setupThankYou() {
@@ -1347,9 +1358,6 @@
     setupStamp();
     setupThankYou();
     revealReceipt();
-
-    document.addEventListener('click', unlockAudio, { once: true });
-    document.addEventListener('scroll', unlockAudio, { once: true, passive: true });
   });
 </script>
 
