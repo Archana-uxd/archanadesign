@@ -537,7 +537,9 @@
     .work-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 32px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
     .work-card {
       display: flex; flex-direction: column;
@@ -567,27 +569,27 @@
       transition: transform 0.5s ease;
     }
     .work-card:hover .work-thumb img { transform: scale(1.04); }
-    .work-meta { padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .work-meta { padding: 28px; display: flex; flex-direction: column; gap: 10px; }
     .work-eyebrow {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 12px; font-weight: 600;
+      font-size: 13px; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--amber);
     }
     .work-title {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: clamp(18px, 2.2vw, 22px); font-weight: 700;
+      font-size: clamp(18px, 2.4vw, 24px); font-weight: 700;
       color: #fff; letter-spacing: -0.01em;
-      line-height: 1.25;
+      line-height: 1.3;
     }
     .work-desc {
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 15px; line-height: 1.6;
+      font-size: 15px; line-height: 1.65;
       color: rgba(255,255,255,0.62);
-      margin-top: 4px;
+      margin-top: 2px;
     }
     .work-cta {
-      margin-top: 8px;
+      margin-top: 12px;
       font-family: 'Inter', system-ui, sans-serif;
       font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
       color: var(--amber);
