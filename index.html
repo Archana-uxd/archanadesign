@@ -215,7 +215,7 @@
     }
 
     .receipt-outer {
-      width: 100%; max-width: 540px;
+      width: 100%; max-width: 1080px;
       position: relative;
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -311,12 +311,32 @@
     }
     .case-line:hover { background: rgba(139,26,26,0.06); }
 
-    .case-left { display: flex; gap: 14px; align-items: center; flex: 1; min-width: 0; }
-    .case-num {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--amber-pale); border: 1.5px solid var(--amber);
+    .case-left { display: flex; gap: 18px; align-items: center; flex: 1; min-width: 0; }
+    .case-thumb {
+      width: 64px; height: 64px; border-radius: 10px;
+      flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 12px; font-weight: 700; color: var(--maroon);
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 900; font-style: italic;
+      font-size: 26px; color: #fff;
+      letter-spacing: -0.02em;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08), 0 4px 14px rgba(0,0,0,0.10);
+      position: relative; overflow: hidden;
+    }
+    .case-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(0,0,0,0.18), transparent 55%);
+      pointer-events: none;
+    }
+    .case-thumb-1 { background: linear-gradient(135deg, #B5342A, #4A0D0D); }
+    .case-thumb-2 { background: linear-gradient(135deg, #E8A020, #B5342A); }
+    .case-thumb-3 { background: linear-gradient(135deg, #2E5DAA, #0D2350); color: #F5C842; }
+    .case-thumb-4 { background: linear-gradient(135deg, #5BC4FF, #1E1E2E); }
+    @media (max-width: 520px) {
+      .case-thumb { width: 52px; height: 52px; font-size: 22px; border-radius: 9px; }
     }
     .case-body { flex: 1; min-width: 0; }
     .case-title { font-size: clamp(16px, 4.4vw, 20px); font-weight: 700; color: var(--ink); display: block; }
@@ -379,8 +399,13 @@
       font-size: clamp(16px, 4.4vw, 20px); font-weight: 700; color: var(--maroon);
       white-space: nowrap; font-variant-numeric: tabular-nums;
     }
-    .li-stars { font-size: clamp(16px, 4.4vw, 20px); color: var(--amber); letter-spacing: 1.5px; white-space: nowrap; }
-    .li-stars .dim { color: var(--dashed); opacity: 0.7; }
+    .li-stars { display: inline-flex; gap: 4px; align-items: center; white-space: nowrap; }
+    .li-stars .star {
+      width: clamp(20px, 5vw, 26px); height: clamp(20px, 5vw, 26px);
+      display: inline-block;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
+    }
+    .li-stars .star--dim { filter: grayscale(1) opacity(0.30); }
 
     /* Grand total + HIRED stamp */
     .grand-wrap { position: relative; }
@@ -394,23 +419,46 @@
     .grand-val { font-size: clamp(14px, 3.8vw, 16px); font-weight: 700; color: var(--maroon); }
 
     .hired-stamp {
-      position: absolute; right: -6px; top: -18px;
+      position: absolute; right: -6px; top: -22px;
       background: var(--amber); color: var(--maroon-deep);
-      font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
-      padding: 3px 10px; border-radius: 2px;
-      border: 1.5px solid var(--maroon);
+      font-size: clamp(10px, 2.6vw, 12px);
+      font-weight: 800; letter-spacing: 0.14em;
+      padding: 5px 12px; border-radius: 3px;
+      border: 1.8px solid var(--maroon);
       transform: scale(2.5) rotate(-8deg);
       opacity: 0; pointer-events: none;
-      transition: none;
+      box-shadow: 0 6px 16px rgba(139,26,26,0.28);
+    }
+    .hired-stamp::before {
+      content: '';
+      position: absolute; inset: -6px;
+      border: 1px dashed rgba(139,26,26,0.4);
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      animation: stampHalo 2.6s ease-in-out 0.8s infinite;
     }
     .hired-stamp.stamped {
-      animation: stampIn 0.4s cubic-bezier(.36,1.5,.64,1) forwards;
+      animation:
+        stampIn 0.5s cubic-bezier(.36,1.5,.64,1) forwards,
+        stampWiggle 3.2s ease-in-out 1s infinite;
     }
     @keyframes stampIn {
-      0% { transform: scale(2.5) rotate(-8deg); opacity: 0; }
-      60% { transform: scale(0.95) rotate(-4deg); opacity: 1; }
-      80% { transform: scale(1.05) rotate(-3.5deg); opacity: 1; }
-      100% { transform: scale(1) rotate(-3deg); opacity: 1; }
+      0%   { transform: scale(2.5) rotate(-8deg); opacity: 0; }
+      55%  { transform: scale(0.94) rotate(-5deg); opacity: 1; }
+      80%  { transform: scale(1.06) rotate(-2.5deg); opacity: 1; }
+      100% { transform: scale(1) rotate(-4deg); opacity: 1; }
+    }
+    @keyframes stampWiggle {
+      0%,100% { transform: scale(1) rotate(-4deg); }
+      25%     { transform: scale(1.04) rotate(-2.5deg); }
+      50%     { transform: scale(1) rotate(-5deg); }
+      75%     { transform: scale(1.03) rotate(-3deg); }
+    }
+    @keyframes stampHalo {
+      0%   { opacity: 0; transform: scale(0.9); }
+      40%  { opacity: 0.7; }
+      100% { opacity: 0; transform: scale(1.25); }
     }
 
     /* Receipt footer */
@@ -754,74 +802,49 @@
       <div>
         <div class="sec-label">WORK</div>
 
-        <div class="case-line" onclick="openCase('clinikk')">
+        <div class="case-line" onclick="openCase('case1')">
           <div class="case-left">
-            <span class="case-num">01</span>
+            <span class="case-thumb case-thumb-1" aria-hidden="true">Rx</span>
             <div class="case-body">
-              <span class="case-title">OPD Claims Redesign</span>
-              <div class="case-detail">Clinikk · 12% monthly submission growth</div>
+              <span class="case-title">Rapido × Clinikk Install Journey</span>
+              <div class="case-detail">Clinikk · ~20% → ~50% app installs in 30 days</div>
             </div>
           </div>
           <span class="case-arrow">↗</span>
         </div>
 
-        <div class="case-line" onclick="openCase('marzi-onboarding')">
+        <div class="case-line" onclick="openCase('case2')">
           <div class="case-left">
-            <span class="case-num">02</span>
+            <span class="case-thumb case-thumb-2" aria-hidden="true">Rb</span>
             <div class="case-body">
-              <span class="case-title">Welcome Journey Redesign</span>
-              <div class="case-detail">Marzi · 4% → 35% engagement</div>
+              <span class="case-title">Designing Trust into Reimbursements</span>
+              <div class="case-detail">Clinikk · for first-time insurance users</div>
             </div>
           </div>
           <span class="case-arrow">↗</span>
         </div>
 
-        <div class="case-line" onclick="openCase('marzi-community')">
+        <div class="case-line" onclick="openCase('case3')">
           <div class="case-left">
-            <span class="case-num">03</span>
+            <span class="case-thumb case-thumb-3" aria-hidden="true">Ef</span>
             <div class="case-body">
-              <span class="case-title">Community Activation</span>
-              <div class="case-detail">Marzi · 2-path coachmark system</div>
+              <span class="case-title">EduFund — Motivation Systems</span>
+              <div class="case-detail">EduFund · habit loops for kids, structure for parents</div>
             </div>
           </div>
           <span class="case-arrow">↗</span>
         </div>
 
-        <div class="case-line" onclick="openCase('teleconsult')">
+        <div class="case-line" onclick="openCase('case4')">
           <div class="case-left">
-            <span class="case-num">04</span>
+            <span class="case-thumb case-thumb-4" aria-hidden="true">Kw</span>
             <div class="case-body">
-              <span class="case-title">Teleconsult App</span>
-              <div class="case-detail">Clinikk · 2% → 25% adoption</div>
+              <span class="case-title">Kwesto — Playful Learning App</span>
+              <div class="case-detail">Mobile · growth through challenges &amp; life skills</div>
             </div>
           </div>
           <span class="case-arrow">↗</span>
         </div>
-      </div>
-
-      <hr class="dash" />
-
-      <!-- Experience Served -->
-      <div class="sec-label">EXPERIENCE SERVED</div>
-      <div class="line-item">
-        <span class="li-name">Years in Product Design</span>
-      </div>
-      <div class="line-item">
-        <span class="li-name">Product</span>
-        <span class="li-desc">Marzi — 50+ community</span>
-      </div>
-      <div class="line-item">
-        <span class="li-name">End-to-end Flows Shipped</span>
-      </div>
-      <div class="line-item">
-        <span class="li-name">User Research Studies</span>
-      </div>
-      <div class="line-item">
-        <span class="li-name">Design System Maintained</span>
-      </div>
-      <div class="line-item">
-        <span class="li-name">Prototyping</span>
-        <span class="li-desc">HTML + Figma</span>
       </div>
 
       <hr class="dash" />
@@ -829,35 +852,96 @@
       <!-- Skills on the Menu -->
       <div class="sec-label">SKILLS ON THE MENU</div>
       <div class="col-heads"><span>Skill</span><span>Level</span></div>
+
       <div class="line-item">
         <span class="li-name">Product Design</span>
         <span class="li-leader"></span>
-        <span class="li-stars">★★★</span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+        </span>
       </div>
       <div class="line-item">
         <span class="li-name">UX Research &amp; Synthesis</span>
         <span class="li-leader"></span>
-        <span class="li-stars">★★★</span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+        </span>
       </div>
       <div class="line-item">
         <span class="li-name">Data-Informed Decisions</span>
         <span class="li-leader"></span>
-        <span class="li-stars">★★★</span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+        </span>
       </div>
       <div class="line-item">
         <span class="li-name">Interaction Design</span>
         <span class="li-leader"></span>
-        <span class="li-stars">★★<span class="dim">★</span></span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+        </span>
+      </div>
+      <div class="line-item">
+        <span class="li-name">Information Architecture</span>
+        <span class="li-leader"></span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+        </span>
+      </div>
+      <div class="line-item">
+        <span class="li-name">Visual &amp; UI Design</span>
+        <span class="li-leader"></span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+        </span>
+      </div>
+      <div class="line-item">
+        <span class="li-name">Design Systems</span>
+        <span class="li-leader"></span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+        </span>
       </div>
       <div class="line-item">
         <span class="li-name">HTML/CSS Prototyping</span>
         <span class="li-leader"></span>
-        <span class="li-stars">★★<span class="dim">★</span></span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star star--dim" />
+        </span>
+      </div>
+      <div class="line-item">
+        <span class="li-name">Usability Testing</span>
+        <span class="li-leader"></span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+        </span>
       </div>
       <div class="line-item">
         <span class="li-name">Product Strategy</span>
         <span class="li-leader"></span>
-        <span class="li-stars">★★<span class="dim">★</span></span>
+        <span class="li-stars">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star star--dim" />
+        </span>
       </div>
 
       <hr class="dash" />
@@ -868,7 +952,7 @@
           <span class="grand-label">TOTAL</span>
           <span class="grand-val">WORTH A CONVERSATION ✦</span>
         </div>
-        <div class="hired-stamp" id="hired-stamp">★ HIRED ★</div>
+        <div class="hired-stamp" id="hired-stamp">★ NOW SERVING ★</div>
       </div>
 
       <!-- Receipt footer -->
@@ -1082,10 +1166,10 @@
 
   /* ═══════ CASE STUDY LINKS ═══════ */
   const caseLinks = {
-    clinikk: 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=1-23&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
-    'marzi-onboarding': 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-4879&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1',
-    'marzi-community': 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-9962&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
-    teleconsult: 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-12723&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1'
+    case1: 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=1-23&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
+    case2: 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-4879&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1',
+    case3: 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-9962&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1',
+    case4: 'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-12723&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1'
   };
   function openCase(key) { if (caseLinks[key]) window.open(caseLinks[key], '_blank'); }
 
