@@ -9,7 +9,7 @@
   <title>Archana Hiremath — Product Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,700;1,9..144,800;1,9..144,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,700;1,9..144,800;1,9..144,900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -226,6 +226,7 @@
     .receipt {
       width: 100%;
       background: var(--paper); color: var(--ink);
+      font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
       font-size: clamp(16px, 4.4vw, 20px); line-height: 1.55;
       padding: 30px 34px 44px;
       position: relative;
@@ -313,29 +314,52 @@
 
     .case-left { display: flex; gap: 18px; align-items: center; flex: 1; min-width: 0; }
     .case-thumb {
-      width: 72px; height: 72px; border-radius: 12px;
+      width: clamp(72px, 16vw, 104px);
+      height: clamp(72px, 16vw, 104px);
+      border-radius: 14px;
       flex-shrink: 0;
       object-fit: cover;
       background: rgba(139,26,26,0.06);
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08), 0 4px 14px rgba(0,0,0,0.12);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08), 0 6px 18px rgba(0,0,0,0.14);
       transition: transform 0.25s ease;
     }
     .case-line:hover .case-thumb { transform: scale(1.04) rotate(-1deg); }
-    @media (max-width: 520px) {
-      .case-thumb { width: 56px; height: 56px; border-radius: 10px; }
-    }
     .case-body { flex: 1; min-width: 0; }
-    .case-title { font-size: clamp(16px, 4.4vw, 20px); font-weight: 700; color: var(--ink); display: block; }
-    .case-detail { font-size: clamp(13px, 3.5vw, 15px); color: var(--maroon); opacity: 0.78; margin-top: 3px; }
+    .case-title {
+      font-family: 'Inter', 'DM Sans', system-ui, sans-serif;
+      font-size: clamp(17px, 4.5vw, 21px); font-weight: 700;
+      color: var(--ink); display: block; letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .case-detail {
+      font-family: 'Inter', 'DM Sans', system-ui, sans-serif;
+      font-size: clamp(13px, 3.5vw, 15px);
+      color: rgba(0,0,0,0.70);
+      margin-top: 4px; line-height: 1.45;
+    }
     .case-arrow {
-      width: 26px; height: 26px; border-radius: 50%;
-      background: var(--maroon); color: #fff;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--maroon);
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; flex-shrink: 0;
-      transition: transform 0.2s, background 0.2s;
+      flex-shrink: 0;
+      transition: transform 0.25s ease, background 0.2s;
+      box-shadow: 0 3px 10px rgba(139,26,26,0.25);
+    }
+    .case-arrow img {
+      width: 60%; height: 60%;
+      filter: brightness(0) invert(1);
+      transform: rotate(-45deg);
+      transition: transform 0.25s ease;
     }
     .case-line:hover .case-arrow {
-      transform: translate(2px, -2px); background: var(--amber); color: var(--ink);
+      transform: translate(3px, -3px); background: var(--amber);
+    }
+    .case-line:hover .case-arrow img {
+      filter: brightness(0);
+      transform: rotate(-45deg) scale(1.08);
+    }
+    @media (max-width: 520px) {
+      .case-arrow { width: 32px; height: 32px; }
     }
 
     /* Metrics in receipt */
@@ -370,7 +394,8 @@
       padding: 0 2px 9px; text-transform: uppercase;
     }
     .line-item {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px 16px; flex-wrap: wrap;
       padding: 11px 2px;
       border-bottom: 1px dotted var(--dashed);
     }
@@ -796,7 +821,7 @@
               <div class="case-detail">Clinikk · ~20% → ~50% app installs in 30 days</div>
             </div>
           </div>
-          <span class="case-arrow">↗</span>
+          <span class="case-arrow" aria-hidden="true"><img src="arrow.svg" alt="" /></span>
         </div>
 
         <div class="case-line" onclick="openCase('case2')">
@@ -807,7 +832,7 @@
               <div class="case-detail">Clinikk · for first-time insurance users</div>
             </div>
           </div>
-          <span class="case-arrow">↗</span>
+          <span class="case-arrow" aria-hidden="true"><img src="arrow.svg" alt="" /></span>
         </div>
 
         <div class="case-line" onclick="openCase('case3')">
@@ -818,7 +843,7 @@
               <div class="case-detail">EduFund · habit loops for kids, structure for parents</div>
             </div>
           </div>
-          <span class="case-arrow">↗</span>
+          <span class="case-arrow" aria-hidden="true"><img src="arrow.svg" alt="" /></span>
         </div>
 
         <div class="case-line" onclick="openCase('case4')">
@@ -829,7 +854,7 @@
               <div class="case-detail">Mobile · growth through challenges &amp; life skills</div>
             </div>
           </div>
-          <span class="case-arrow">↗</span>
+          <span class="case-arrow" aria-hidden="true"><img src="arrow.svg" alt="" /></span>
         </div>
       </div>
 
