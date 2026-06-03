@@ -215,7 +215,7 @@
     }
 
     .receipt-outer {
-      width: 100%; max-width: 1080px;
+      width: 100%; max-width: 810px;
       position: relative;
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -313,30 +313,16 @@
 
     .case-left { display: flex; gap: 18px; align-items: center; flex: 1; min-width: 0; }
     .case-thumb {
-      width: 64px; height: 64px; border-radius: 10px;
+      width: 72px; height: 72px; border-radius: 12px;
       flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Fraunces', Georgia, serif;
-      font-weight: 900; font-style: italic;
-      font-size: 26px; color: #fff;
-      letter-spacing: -0.02em;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08), 0 4px 14px rgba(0,0,0,0.10);
-      position: relative; overflow: hidden;
+      object-fit: cover;
+      background: rgba(139,26,26,0.06);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08), 0 4px 14px rgba(0,0,0,0.12);
+      transition: transform 0.25s ease;
     }
-    .case-thumb::after {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 55%),
-        radial-gradient(circle at 80% 80%, rgba(0,0,0,0.18), transparent 55%);
-      pointer-events: none;
-    }
-    .case-thumb-1 { background: linear-gradient(135deg, #B5342A, #4A0D0D); }
-    .case-thumb-2 { background: linear-gradient(135deg, #E8A020, #B5342A); }
-    .case-thumb-3 { background: linear-gradient(135deg, #2E5DAA, #0D2350); color: #F5C842; }
-    .case-thumb-4 { background: linear-gradient(135deg, #5BC4FF, #1E1E2E); }
+    .case-line:hover .case-thumb { transform: scale(1.04) rotate(-1deg); }
     @media (max-width: 520px) {
-      .case-thumb { width: 52px; height: 52px; font-size: 22px; border-radius: 9px; }
+      .case-thumb { width: 56px; height: 56px; border-radius: 10px; }
     }
     .case-body { flex: 1; min-width: 0; }
     .case-title { font-size: clamp(16px, 4.4vw, 20px); font-weight: 700; color: var(--ink); display: block; }
@@ -384,7 +370,7 @@
       padding: 0 2px 9px; text-transform: uppercase;
     }
     .line-item {
-      display: flex; align-items: baseline; gap: 8px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
       padding: 11px 2px;
       border-bottom: 1px dotted var(--dashed);
     }
@@ -399,13 +385,13 @@
       font-size: clamp(16px, 4.4vw, 20px); font-weight: 700; color: var(--maroon);
       white-space: nowrap; font-variant-numeric: tabular-nums;
     }
-    .li-stars { display: inline-flex; gap: 4px; align-items: center; white-space: nowrap; }
+    .li-stars { display: inline-flex; gap: 3px; align-items: center; white-space: nowrap; flex-shrink: 0; }
     .li-stars .star {
-      width: clamp(20px, 5vw, 26px); height: clamp(20px, 5vw, 26px);
+      width: clamp(16px, 4vw, 20px); height: clamp(16px, 4vw, 20px);
       display: inline-block;
       filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
     }
-    .li-stars .star--dim { filter: grayscale(1) opacity(0.30); }
+    .li-stars .star--dim { filter: grayscale(1) opacity(0.28); }
 
     /* Grand total + HIRED stamp */
     .grand-wrap { position: relative; }
@@ -804,7 +790,7 @@
 
         <div class="case-line" onclick="openCase('case1')">
           <div class="case-left">
-            <span class="case-thumb case-thumb-1" aria-hidden="true">Rx</span>
+            <img src="01.png" alt="" class="case-thumb" loading="lazy" />
             <div class="case-body">
               <span class="case-title">Rapido × Clinikk Install Journey</span>
               <div class="case-detail">Clinikk · ~20% → ~50% app installs in 30 days</div>
@@ -815,7 +801,7 @@
 
         <div class="case-line" onclick="openCase('case2')">
           <div class="case-left">
-            <span class="case-thumb case-thumb-2" aria-hidden="true">Rb</span>
+            <img src="02.png" alt="" class="case-thumb" loading="lazy" />
             <div class="case-body">
               <span class="case-title">Designing Trust into Reimbursements</span>
               <div class="case-detail">Clinikk · for first-time insurance users</div>
@@ -826,7 +812,7 @@
 
         <div class="case-line" onclick="openCase('case3')">
           <div class="case-left">
-            <span class="case-thumb case-thumb-3" aria-hidden="true">Ef</span>
+            <img src="03.png" alt="" class="case-thumb" loading="lazy" />
             <div class="case-body">
               <span class="case-title">EduFund — Motivation Systems</span>
               <div class="case-detail">EduFund · habit loops for kids, structure for parents</div>
@@ -837,7 +823,7 @@
 
         <div class="case-line" onclick="openCase('case4')">
           <div class="case-left">
-            <span class="case-thumb case-thumb-4" aria-hidden="true">Kw</span>
+            <img src="04.png" alt="" class="case-thumb" loading="lazy" />
             <div class="case-body">
               <span class="case-title">Kwesto — Playful Learning App</span>
               <div class="case-detail">Mobile · growth through challenges &amp; life skills</div>
@@ -855,8 +841,9 @@
 
       <div class="line-item">
         <span class="li-name">Product Design</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="5">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
@@ -864,8 +851,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">UX Research &amp; Synthesis</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="5">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
@@ -873,8 +861,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">Data-Informed Decisions</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="5">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
@@ -882,8 +871,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">Interaction Design</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="5">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
@@ -891,8 +881,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">Information Architecture</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="5">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
@@ -900,8 +891,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">Visual &amp; UI Design</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="5">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
@@ -909,8 +901,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">Design Systems</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="5">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
@@ -918,8 +911,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">HTML/CSS Prototyping</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="4">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star star--dim" />
@@ -927,8 +921,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">Usability Testing</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="5">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
@@ -936,8 +931,9 @@
       </div>
       <div class="line-item">
         <span class="li-name">Product Strategy</span>
-        <span class="li-leader"></span>
-        <span class="li-stars">
+        <span class="li-stars" data-rating="4">
+          <img src="star.svg" alt="" class="star" />
+          <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star" />
           <img src="star.svg" alt="" class="star star--dim" />
