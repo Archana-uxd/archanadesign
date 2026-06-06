@@ -63,6 +63,56 @@
       position: fixed; inset: 0;
       background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(180,30,30,0.35) 0%, transparent 70%);
       pointer-events: none; z-index: 0;
+      animation: glowPulse 8s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    @keyframes floatIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes ripple {
+      0% { width: 0; height: 0; opacity: 0.4; }
+      100% { width: 300px; height: 300px; opacity: 0; }
+    }
+
+    @keyframes successPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes staggerIn {
+      0% { opacity: 0; transform: translateX(-10px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes starBurst {
+      0% {
+        width: 2px;
+        height: 2px;
+        opacity: 1;
+        box-shadow:
+          0 0 0 rgba(255, 215, 0, 0.8),
+          0 0 0 rgba(255, 215, 0, 0.8);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+        box-shadow:
+          -60px -60px 0 rgba(255, 215, 0, 0),
+          60px -60px 0 rgba(255, 215, 0, 0),
+          -60px 60px 0 rgba(255, 215, 0, 0),
+          60px 60px 0 rgba(255, 215, 0, 0);
+      }
     }
 
     /* Dotted texture (from portfolio v2) */
@@ -97,10 +147,30 @@
       cursor: pointer;
       transition: transform 0.18s, box-shadow 0.18s;
       box-shadow: 0 4px 20px rgba(232,160,32,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .btn-primary:active::before {
+      animation: ripple 0.6s ease-out;
     }
     .btn-primary:hover {
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 8px 28px rgba(232,160,32,0.45);
+    }
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
     }
 
     .btn-secondary {
@@ -110,17 +180,38 @@
       border: 1px solid rgba(255,255,255,0.15);
       padding: 13px 26px; border-radius: 100px;
       cursor: pointer;
-      transition: transform 0.18s, background 0.18s;
+      transition: transform 0.18s, background 0.18s, border-color 0.18s;
       backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-secondary::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .btn-secondary:active::before {
+      animation: ripple 0.6s ease-out;
     }
     .btn-secondary:hover {
       transform: translateY(-2px);
       background: rgba(255,255,255,0.14);
     }
+    .btn-secondary:active {
+      transform: translateY(0) scale(0.98);
+    }
     .btn-secondary.copied {
       background: rgba(232,160,32,0.18);
       border-color: var(--amber);
       color: var(--amber-light);
+      animation: successPulse 0.6s ease-out;
     }
 
     /* ═══════ TOAST ═══════ */
@@ -216,6 +307,7 @@
 
     .receipt-outer {
       width: 100%; max-width: 525px;
+      animation: floatIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -398,6 +490,22 @@
       gap: 8px;
       padding: 12px 2px;
       border-bottom: 1px dotted var(--dashed);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      animation: staggerIn 0.5s ease-out backwards;
+    }
+    .line-item:nth-child(1) { animation-delay: 0s; }
+    .line-item:nth-child(2) { animation-delay: 0.08s; }
+    .line-item:nth-child(3) { animation-delay: 0.16s; }
+    .line-item:nth-child(4) { animation-delay: 0.24s; }
+    .line-item:nth-child(5) { animation-delay: 0.32s; }
+    .line-item:nth-child(6) { animation-delay: 0.40s; }
+    .line-item:nth-child(7) { animation-delay: 0.48s; }
+    .line-item:nth-child(8) { animation-delay: 0.56s; }
+    .line-item:nth-child(9) { animation-delay: 0.64s; }
+    .line-item:nth-child(10) { animation-delay: 0.72s; }
+    .line-item:hover {
+      opacity: 0.9;
+      transform: translateX(2px);
     }
     .line-item:last-child { border-bottom: none; }
     .li-name { font-size: clamp(15px, 4vw, 18px); font-weight: 600; color: var(--ink); }
@@ -410,13 +518,27 @@
       font-size: clamp(16px, 4.4vw, 20px); font-weight: 700; color: var(--maroon);
       white-space: nowrap; font-variant-numeric: tabular-nums;
     }
-    .li-stars { display: inline-flex; gap: 3px; align-items: center; white-space: nowrap; flex-shrink: 0; }
+    .li-stars {
+      display: inline-flex; gap: 3px; align-items: center;
+      white-space: nowrap; flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .line-item:hover .li-stars {
+      transform: scale(1.1);
+    }
     .li-stars .star {
       width: clamp(16px, 4vw, 20px); height: clamp(16px, 4vw, 20px);
       display: inline-block;
       filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+    .line-item:hover .li-stars .star {
+      filter: drop-shadow(0 2px 6px rgba(232,160,32,0.3));
     }
     .li-stars .star--dim { filter: grayscale(1) opacity(0.28); }
+    .line-item:hover .li-stars .star--dim {
+      filter: grayscale(0.5) opacity(0.5);
+    }
 
     /* Grand total + HIRED stamp */
     .grand-wrap { position: relative; }
@@ -543,32 +665,88 @@
     }
     .work-card {
       display: flex; flex-direction: column;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      overflow: visible;
       text-decoration: none;
-      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  background 0.3s ease,
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease,
+                  backdrop-filter 0.3s ease;
+      position: relative;
+    }
+    .work-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(232,160,32,0.1) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      border-radius: 20px;
+    }
+    .work-card::after {
+      content: '';
+      position: absolute;
+      inset: 50%;
+      width: 2px;
+      height: 2px;
+      background: radial-gradient(circle, #FFD700 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      pointer-events: none;
+      box-shadow:
+        0 0 0 rgba(255, 215, 0, 0.6),
+        0 0 0 rgba(255, 215, 0, 0.6);
     }
     .work-card:hover, .work-card:focus-visible {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(232,160,32,0.35);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+      transform: translateY(-8px) scale(1.02) rotate(0.5deg);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border-color: rgba(232,160,32,0.5);
+      box-shadow: 0 20px 60px rgba(232,160,32,0.15),
+                  0 0 40px rgba(232,160,32,0.1);
       outline: none;
+    }
+    .work-card:hover::before {
+      opacity: 1;
+    }
+    .work-card:hover::after {
+      animation: starBurst 0.8s ease-out;
     }
     .work-thumb {
       width: 100%; aspect-ratio: 4 / 3;
-      background: rgba(232,160,32,0.10);
+      background: linear-gradient(135deg, rgba(232,160,32,0.15) 0%, rgba(232,160,32,0.05) 100%);
       overflow: hidden;
+      position: relative;
+    }
+    .work-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     .work-thumb img {
       width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+      filter: brightness(1) saturate(1);
     }
-    .work-card:hover .work-thumb img { transform: scale(1.04); }
+    .work-card:hover .work-thumb img {
+      transform: scale(1.08) rotate(-1deg);
+      filter: brightness(1.1) saturate(1.15);
+    }
+    .work-card:hover .work-thumb::after {
+      opacity: 1;
+    }
     .work-meta { padding: 28px; display: flex; flex-direction: column; gap: 10px; }
     .work-eyebrow {
       font-family: 'Inter', system-ui, sans-serif;
@@ -593,9 +771,16 @@
       font-family: 'Inter', system-ui, sans-serif;
       font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
       color: var(--amber);
-      transition: gap 0.2s, color 0.2s;
+      transition: color 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  text-shadow 0.3s ease;
+      display: inline-block;
+      text-shadow: 0 0 0 rgba(232,160,32,0);
     }
-    .work-card:hover .work-cta { color: var(--amber-light); }
+    .work-card:hover .work-cta {
+      color: var(--amber-light);
+      transform: translateX(4px);
+      text-shadow: 0 0 12px rgba(232,160,32,0.4);
+    }
     @media (max-width: 760px) {
       .work-grid { grid-template-columns: 1fr; gap: 16px; }
       .work-meta { padding: 20px; }
