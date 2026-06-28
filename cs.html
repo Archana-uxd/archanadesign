@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<title>Case Study — Archana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--maroon:#8B1A1A;--maroon-deep:#4A0D0D;--amber:#E8A020;--amber-light:#F5C842;--paper:#FDF9F4;--ink:#1C1917}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--maroon-deep);color:var(--paper);-webkit-font-smoothing:antialiased}
+
+  /* floating nav bar — Modash-inspired */
+  .nav-wrap{position:sticky;top:0;z-index:50;padding:10px clamp(12px,3vw,28px);background:transparent;pointer-events:none}
+  .nav{display:flex;align-items:center;gap:16px;
+    padding:10px 10px 10px 16px;
+    background:#fff;
+    border-radius:100px;
+    box-shadow:0 2px 24px rgba(28,9,9,.10),0 0 0 1px rgba(28,9,9,.06);
+    pointer-events:all}
+  .back{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:50%;
+    font-size:16px;color:var(--ink);
+    background:rgba(28,9,9,.05);text-decoration:none;
+    transition:background .18s,color .18s}
+  .back:hover{background:var(--ink);color:#fff}
+  .back span{display:none}
+  .nav-center{flex:1;min-width:0;display:flex;align-items:center;gap:8px}
+  .nav .eyebrow{display:none}
+  .nav .title{font-weight:600;letter-spacing:-.01em;
+    font-size:clamp(14px,1.6vw,16px);color:var(--ink);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav-cta{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;
+    font-weight:600;font-size:13px;letter-spacing:-.01em;color:#fff;
+    background:var(--ink);
+    padding:10px 18px;border-radius:100px;text-decoration:none;
+    transition:transform .18s,background .18s;margin-left:auto;white-space:nowrap}
+  .nav-cta:hover{background:var(--maroon);transform:translateY(-1px)}
+  @media(max-width:600px){.nav-cta{display:none}}
+
+  /* progress bar */
+  .prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--amber);z-index:60;transition:width .1s linear}
+
+  /* image stack */
+  .deck{max-width:1160px;margin:0 auto;padding:clamp(16px,3vw,30px) clamp(10px,3vw,24px) 80px;display:flex;flex-direction:column;gap:clamp(10px,2vw,18px)}
+  .deck img{width:100%;height:auto;display:block;border-radius:12px;background:#fff;
+    box-shadow:0 14px 40px rgba(0,0,0,.35);opacity:0;transform:translateY(20px);
+    transition:opacity .6s ease,transform .6s ease}
+  .deck img.in{opacity:1;transform:none}
+  .loading{text-align:center;padding:60px 20px;color:rgba(255,255,255,.5);font-size:14px}
+
+  /* more case studies — exact home-screen work-card style */
+  .more{max-width:1160px;margin:0 auto;padding:40px clamp(10px,3vw,24px) 80px}
+  .more-label{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:8px}
+  .more-head{font-family:'Fraunces',Georgia,serif;font-weight:800;font-size:clamp(26px,4vw,40px);
+    color:#fff;letter-spacing:-.01em;margin-bottom:32px}
+  .work-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px;max-width:1000px;margin:0 auto}
+  .work-card{display:flex;flex-direction:column;
+    background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.15);border-radius:20px;overflow:hidden;text-decoration:none;
+    transition:transform .3s cubic-bezier(0.34,1.56,0.64,1),background .3s ease,border-color .3s ease,box-shadow .3s ease;
+    position:relative}
+  .work-card:hover{transform:translateY(-8px) scale(1.02);background:rgba(255,255,255,0.08);
+    border-color:rgba(232,160,32,0.5);box-shadow:0 20px 60px rgba(232,160,32,0.15),0 0 40px rgba(232,160,32,0.1)}
+  .work-thumb{width:100%;aspect-ratio:4/3;
+    background:linear-gradient(135deg,rgba(232,160,32,0.15) 0%,rgba(232,160,32,0.05) 100%);
+    overflow:hidden;position:relative}
+  .work-thumb img{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .6s cubic-bezier(0.34,1.56,0.64,1),filter .3s ease}
+  .work-card:hover .work-thumb img{transform:scale(1.08) rotate(-1deg);filter:brightness(1.1) saturate(1.15)}
+  .work-meta{padding:28px;display:flex;flex-direction:column;gap:10px}
+  .work-eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+  .work-title{font-size:clamp(18px,2.4vw,24px);font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1.3}
+  .work-desc{font-size:15px;line-height:1.65;color:rgba(255,255,255,0.62);margin-top:2px}
+  .work-cta{margin-top:12px;font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--amber);
+    display:inline-block;transition:color .3s ease,transform .3s cubic-bezier(0.34,1.56,0.64,1)}
+  .work-card:hover .work-cta{color:var(--amber-light);transform:translateX(4px)}
+  @media(max-width:760px){.work-grid{grid-template-columns:1fr;gap:16px}.work-meta{padding:20px}}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="nav-wrap">
+<nav class="nav">
+  <a class="back" href="index.html" id="backBtn" aria-label="Back">←</a>
+  <div class="nav-center">
+    <span class="title" id="csTitle">Case study</span>
+  </div>
+  <a class="nav-cta" href="index.html">All work ↗</a>
+</nav>
+</div>
+
+<div class="deck" id="deck"><div class="loading">Loading case study…</div></div>
+
+<div class="more">
+  <div class="more-label">More work</div>
+  <div class="more-head">Other case studies.</div>
+  <div class="work-grid" id="moreGrid"></div>
+</div>
+
+<script>
+  const CASES = {
+    clinikk: { title:'Rapido × Clinikk Install Journey', tag:'Clinikk · 2025', dir:'cs/clinikk', ext:'png',
+               order:Array.from({length:28},(_,i)=>i+1) },
+    edufund: { title:'EduFund — Motivation Systems', tag:'EduFund · 2023', dir:'cs/edufund', ext:'png',
+               order:Array.from({length:22},(_,i)=>i+1) },
+    kwesto:  { title:'Kwesto — Playful Learning App', tag:'Mobile · Case study', dir:'cs/kwesto', ext:'svg',
+               order:[1] },
+  };
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id') || 'clinikk';
+  const cs = CASES[id] || CASES.clinikk;
+
+  document.getElementById('csTitle').textContent = cs.title;
+  document.title = cs.title + ' — Archana';
+
+  // smart back: go back if we came from the portfolio, else link to index
+  const backBtn = document.getElementById('backBtn');
+  backBtn.addEventListener('click', (e)=>{
+    if (document.referrer && history.length > 1) { e.preventDefault(); history.back(); }
+  });
+
+  const deck = document.getElementById('deck');
+  deck.innerHTML = '';
+  let io = null;
+  try { io = new IntersectionObserver((es)=>{es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:0,rootMargin:'300px'}); } catch(e){}
+  cs.order.forEach((n,i)=>{
+    const img = document.createElement('img');
+    img.alt = `${cs.title} — slide ${i+1}`;
+    img.loading = i < 3 ? 'eager' : 'lazy';
+    img.onload = ()=>img.classList.add('in');           // reveal once loaded (reliable)
+    img.onerror = ()=>img.remove();
+    img.src = `${cs.dir}/${n}.${cs.ext}`;
+    if (img.complete) img.classList.add('in');           // cached
+    deck.appendChild(img);
+    if (io) io.observe(img);
+  });
+  // hard fallback: never leave a loaded image hidden
+  setTimeout(()=>{ deck.querySelectorAll('img').forEach(im=>{ if(im.complete && im.naturalWidth) im.classList.add('in'); }); }, 800);
+
+  // full portfolio set — mirrors the home-screen work cards exactly
+  const ALL_WORK = [
+    { id:'clinikk', thumb:'01.png', eyebrow:'Clinikk', title:'Rapido × Clinikk Install Journey',
+      desc:'~20% → ~50% app installs in 30 days. Redesigned the post-purchase onboarding across sales calls and WhatsApp.',
+      href:'cs.html?id=clinikk' },
+    { id:'reimbursements', thumb:'02.png', eyebrow:'Clinikk', title:'Designing Trust into Reimbursements',
+      desc:'For first-time insurance users — a step-by-step claim flow that explained jargon and showed live status at every stage.',
+      href:'https://www.figma.com/proto/2ZzyJMy0y2ze9cghifWmeW/Untitled?node-id=3-4879&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1', ext:true },
+    { id:'edufund', thumb:'03.png', eyebrow:'EduFund', title:'EduFund — Motivation Systems',
+      desc:'Habit loops for kids and structure for parents. Designed a goal-driven activity system that balanced fun and accountability.',
+      href:'cs.html?id=edufund' },
+    { id:'kwesto', thumb:'04.png', eyebrow:'Mobile', title:'Kwesto — Playful Learning App',
+      desc:'Growth through challenges and essential life skills. Built the playful, parent-co-piloted learning experience end to end.',
+      href:'cs.html?id=kwesto' },
+  ];
+  const moreGrid = document.getElementById('moreGrid');
+  ALL_WORK.filter(w=>w.id!==id).forEach(w=>{
+    const target = w.ext ? ' target="_blank" rel="noopener"' : '';
+    moreGrid.innerHTML += `<a class="work-card" href="${w.href}"${target} aria-label="Open ${w.title} case study">
+      <div class="work-thumb"><img src="${w.thumb}" alt="" loading="lazy" /></div>
+      <div class="work-meta">
+        <span class="work-eyebrow">${w.eyebrow}</span>
+        <h3 class="work-title">${w.title}</h3>
+        <p class="work-desc">${w.desc}</p>
+        <span class="work-cta">Open case study →</span>
+      </div>
+    </a>`;
+  });
+
+  const prog = document.getElementById('prog');
+  addEventListener('scroll', ()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+</script>
+</body>
+</html>
